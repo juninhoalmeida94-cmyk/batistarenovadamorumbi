@@ -499,28 +499,76 @@ header{
 
 /* ============ ORAÇÃO ============ */
 .prayer-section{
-  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:100vh;
 }
-.prayer-text{padding:120px 70px 120px 0;}
-.prayer-text .s-head{margin-bottom:36px;}
-.prayer-text p.note{color:#a8a8a8;font-size:15px;line-height:1.7;max-width:420px;}
+.prayer-text{
+  padding:96px 72px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border-right:1px solid var(--line-dark);
+}
+.prayer-text h2{
+  font-size:clamp(35px,4vw,52px);
+  line-height:1.08;
+  margin-bottom:28px;
+}
+.prayer-text p{
+  color:#a3a1a0;
+  font-size:16px;
+  line-height:1.65;
+  max-width:38ch;
+  margin-bottom:40px;
+}
+.prayer-quote{
+  border-left:1px solid var(--line-dark);
+  padding-left:20px;
+  font-family:var(--display);
+  font-style:italic;
+  font-size:17px;
+  line-height:1.6;
+  color:#cfcdca;
+  max-width:40ch;
+}
+.prayer-quote span{
+  display:block;
+  margin-top:12px;
+  font-family:var(--mono);
+  font-style:normal;
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#777;
+}
 .prayer-form{
-  background:var(--bone);padding:120px 70px;
+  background:#141416;
+  padding:96px 72px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
-.section-black .prayer-form{background:#141414;}
-.field{margin-bottom:22px;}
+.field{margin-bottom:36px;}
 .field label{
   display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;
   color:var(--grey);margin-bottom:10px;
 }
 .field input,.field textarea{
-  width:100%;background:transparent;border:none;border-bottom:1px solid var(--ink);
-  padding:10px 0;font-family:var(--body);font-size:15.5px;color:var(--white);
-  outline:none;resize:none;
+  width:100%;background:transparent;border:none;border-bottom:1px solid var(--line-dark);
+  padding:4px 0 12px;font-family:var(--body);font-size:16px;color:var(--white);
+  outline:none;resize:none;transition:border-color .25s ease;
 }
 .field input::placeholder,.field textarea::placeholder{color:#666;}
-.field textarea{height:90px;}
-.form-submit{margin-top:32px;}
+.field input:focus,.field textarea:focus{border-bottom-color:var(--white);}
+.field textarea{min-height:64px;line-height:1.5;}
+.form-error{
+  display:none;
+  margin-top:10px;
+  color:#d98a5f;
+  font-size:13px;
+}
+.form-submit{margin-top:8px;}
 
 /* ============ CONTATO ============ */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
@@ -601,7 +649,7 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .ministries-hero{min-height:76vh;padding:120px 24px 90px;}
   .min-grid{grid-template-columns:1fr;}
   .prayer-section{grid-template-columns:1fr;}
-  .prayer-text{padding:90px 32px 60px;}
+  .prayer-text{padding:90px 32px 60px;border-right:none;border-bottom:1px solid var(--line-dark);}
   .prayer-form{padding:60px 32px 90px;}
   .contact-grid{grid-template-columns:1fr;gap:56px;}
   .footer-top{grid-template-columns:1fr 1fr;gap:40px;}

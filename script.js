@@ -28,10 +28,28 @@ const prayerForm = document.querySelector("#prayer-form");
 if (prayerForm) {
   prayerForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const button = prayerForm.querySelector('button[type="submit"]');
-    if (!button) return;
-    button.textContent = "Pedido enviado";
-    button.disabled = true;
+
+    const whatsappNumber = "5544998338663";
+    const nameInput = document.querySelector("#nome");
+    const emailInput = document.querySelector("#email");
+    const prayerInput = document.querySelector("#pedido");
+    const nameError = document.querySelector("#erro-nome");
+    const prayerError = document.querySelector("#erro-pedido");
+
+    const name = nameInput?.value.trim() || "";
+    const email = emailInput?.value.trim() || "";
+    const prayer = prayerInput?.value.trim() || "";
+
+    if (nameError) nameError.style.display = name ? "none" : "block";
+    if (prayerError) prayerError.style.display = prayer ? "none" : "block";
+
+    if (!name || !prayer) return;
+
+    let message = `Pedido de oração\n\nNome: ${name}`;
+    if (email) message += `\nE-mail: ${email}`;
+    message += `\n\n${prayer}`;
+
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
   });
 }
 

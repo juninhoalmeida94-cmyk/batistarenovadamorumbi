@@ -191,17 +191,23 @@ function stopGallery() {
 
 if (galleryTrack && galleryCards.length && galleryDotsContainer) {
   const maxIndex = getMaxGalleryIndex();
+  const shouldShowDots = maxIndex <= 12;
 
-  // um dot por POSIÇÃO possível, não por card
-  for (let i = 0; i <= maxIndex; i++) {
-    const dot = document.createElement("button");
-    dot.type = "button";
-    dot.setAttribute("aria-label", `Ir para posição ${i + 1}`);
-    dot.addEventListener("click", () => {
-      showGallerySlide(i);
-      restartGallery();
-    });
-    galleryDotsContainer.appendChild(dot);
+  if (shouldShowDots) {
+    galleryDotsContainer.hidden = false;
+    // um dot por POSIÇÃO possível, não por card
+    for (let i = 0; i <= maxIndex; i++) {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Ir para posição ${i + 1}`);
+      dot.addEventListener("click", () => {
+        showGallerySlide(i);
+        restartGallery();
+      });
+      galleryDotsContainer.appendChild(dot);
+    }
+  } else {
+    galleryDotsContainer.hidden = true;
   }
 
   galleryCards.forEach((card) => {

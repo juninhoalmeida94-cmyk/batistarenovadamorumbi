@@ -578,12 +578,12 @@ header{
 .form-submit{margin-top:8px;}
 .btn-prayer{
   border-color:#f2f0eb;
-  color:#f2f0eb;
-  background:transparent;
+  color:#0b0b0c;
+  background:#f2f0eb;
 }
 .btn-prayer:hover,
 .btn-prayer:focus-visible{
-  background:#f2f0eb;
+  background:var(--white);
   color:#0b0b0c;
   border-color:#f2f0eb;
 }

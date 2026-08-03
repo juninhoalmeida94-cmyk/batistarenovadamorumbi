@@ -561,6 +561,13 @@ header{
 }
 .field input::placeholder,.field textarea::placeholder{color:#666;}
 .field input:focus,.field textarea:focus{border-bottom-color:var(--white);}
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus{
+  -webkit-text-fill-color:var(--white);
+  -webkit-box-shadow:0 0 0 1000px #141416 inset;
+  transition:background-color 9999s ease-in-out 0s;
+}
 .field textarea{min-height:64px;line-height:1.5;}
 .form-error{
   display:none;
@@ -569,6 +576,17 @@ header{
   font-size:13px;
 }
 .form-submit{margin-top:8px;}
+.btn-prayer{
+  border-color:#f2f0eb;
+  color:#f2f0eb;
+  background:transparent;
+}
+.btn-prayer:hover,
+.btn-prayer:focus-visible{
+  background:#f2f0eb;
+  color:#0b0b0c;
+  border-color:#f2f0eb;
+}
 
 /* ============ CONTATO ============ */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}

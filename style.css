@@ -338,21 +338,29 @@ header{
   gap:14px;
 }
 .culto-photo{
+  display:block;
+  width:100%;
+  padding:0;
+  cursor:pointer;
+  background:none;
+  border:none;
+}
+.culto-photo-frame{
   position:relative;
   display:block;
+  aspect-ratio:4/5;
   overflow:hidden;
   border:1px solid var(--ink);
   background-color:var(--white);
-  padding:0;
-  cursor:pointer;
-  aspect-ratio:4/5;
 }
-.culto-photo img{
+.culto-photo-frame img{
+  position:absolute;
+  inset:0;
   width:100%;height:100%;
   object-fit:cover;
   transition:transform .5s ease, filter .5s ease;
 }
-.culto-photo:hover img{transform:scale(1.04);filter:saturate(1.08);}
+.culto-photo:hover .culto-photo-frame img{transform:scale(1.04);filter:saturate(1.08);}
 
 .culto-more{
   display:flex;justify-content:center;

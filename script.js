@@ -271,13 +271,17 @@ function buildCultoPhotoButton(photo, index) {
   button.className = "culto-photo";
   button.setAttribute("aria-label", `Ampliar foto ${index + 1}`);
 
+  const frame = document.createElement("span");
+  frame.className = "culto-photo-frame";
+
   const img = document.createElement("img");
   img.src = photo.src;
   img.alt = photo.alt;
   img.loading = "lazy";
   img.decoding = "async";
 
-  button.appendChild(img);
+  frame.appendChild(img);
+  button.appendChild(frame);
   button.addEventListener("click", () => openCultoViewer(index));
   return button;
 }

@@ -122,8 +122,9 @@ header{
   content:"";
   position:absolute;
   inset:0;
-  z-index:0;
+  z-index:1;
   background:rgba(0,0,0,.5);
+  pointer-events:none;
 }
 .hero-video{
   position:absolute;
@@ -138,7 +139,7 @@ header{
   position:absolute;
   right:28px;
   bottom:28px;
-  z-index:2;
+  z-index:3;
   display:flex;
   gap:10px;
 }
@@ -169,7 +170,7 @@ header{
 }
 .hero .wrap{
   position:relative;
-  z-index:1;
+  z-index:2;
   display:grid;
   place-items:center;
   width:min(980px,100%);

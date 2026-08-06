@@ -144,131 +144,172 @@ document.querySelectorAll(".watch-trigger").forEach((trigger) => {
 });
 
 /* =========================================================
-   GALERIA / CARROSSEL
+   GALERIA: FOTOS DO ÚLTIMO CULTO
+   (grade de destaque + modal com todas as fotos + visualizador)
 ========================================================= */
-const galleryTrack = document.querySelector(".gallery-track");
-const galleryCards = document.querySelectorAll(".photo-card");
-const galleryPrev = document.querySelector(".gallery-btn-prev");
-const galleryNext = document.querySelector(".gallery-btn-next");
-const galleryDotsContainer = document.querySelector(".gallery-dots");
 
-let galleryIndex = 0;
-let galleryTimer = null;
-let cachedCardWidth = 0;
-let cachedGap = 0;
+// LISTA DE FOTOS — para adicionar mais fotos, é só incluir novas
+// linhas aqui. A grade de destaque, o contador e o modal "ver
+// todas" se atualizam sozinhos, sem precisar mexer em mais nada.
+const cultoPhotos = [
+  { src: "assets/pibr-culto/culto-01.jpg", alt: "Foto 1 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-02.jpg", alt: "Foto 2 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-03.jpg", alt: "Foto 3 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-04.jpg", alt: "Foto 4 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-05.jpg", alt: "Foto 5 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-06.jpg", alt: "Foto 6 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-07.jpg", alt: "Foto 7 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-08.jpg", alt: "Foto 8 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-09.jpg", alt: "Foto 9 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-10.jpg", alt: "Foto 10 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-11.jpg", alt: "Foto 11 do último culto — Batista Renovada Morumbi" },
+  { src: "assets/pibr-culto/culto-12.jpg", alt: "Foto 12 do último culto — Batista Renovada Morumbi" },
+];
 
-function getVisibleGalleryCount() {
-  if (window.innerWidth <= 600) return 1;
-  if (window.innerWidth <= 980) return 2;
-  return 3;
+const CULTO_FEATURED_COUNT = 12;
+
+const cultoFeaturedGrid = document.querySelector("#cultoFeaturedGrid");
+const cultoOpenAllBtn = document.querySelector("#cultoOpenAll");
+const cultoCountEl = document.querySelector("#cultoCount");
+const cultoModal = document.querySelector("#cultoModal");
+const cultoModalThumbs = document.querySelector("#cultoModalThumbs");
+const cultoModalTotal = document.querySelector("#cultoModalTotal");
+const cultoModalClose = document.querySelector("#cultoModalClose");
+const cultoViewer = document.querySelector("#cultoViewer");
+const cultoViewerImg = document.querySelector("#cultoViewerImg");
+const cultoViewerCounter = document.querySelector("#cultoViewerCounter");
+const cultoViewerPrev = document.querySelector("#cultoViewerPrev");
+const cultoViewerNext = document.querySelector("#cultoViewerNext");
+const cultoViewerClose = document.querySelector("#cultoViewerClose");
+
+let cultoViewerIndex = 0;
+
+function buildCultoPhotoButton(photo, index) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "culto-photo";
+  button.setAttribute("aria-label", `Ampliar foto ${index + 1}`);
+
+  const img = document.createElement("img");
+  img.src = photo.src;
+  img.alt = photo.alt;
+  img.loading = "lazy";
+  img.decoding = "async";
+
+  button.appendChild(img);
+  button.addEventListener("click", () => openCultoViewer(index));
+  return button;
 }
 
-function getMaxGalleryIndex() {
-  const visibleCount = getVisibleGalleryCount();
-  return Math.max(galleryCards.length - visibleCount, 0);
+function lockScroll(lock) {
+  document.body.style.overflow = lock ? "hidden" : "";
 }
 
-function measureGallery() {
-  if (!galleryCards.length) return;
-  cachedCardWidth = galleryCards[0].getBoundingClientRect().width;
-  cachedGap = parseFloat(getComputedStyle(galleryTrack).gap) || 0;
+// grade de destaque (as primeiras fotos, sempre visíveis na seção)
+if (cultoFeaturedGrid && cultoPhotos.length) {
+  cultoPhotos.slice(0, CULTO_FEATURED_COUNT).forEach((photo, index) => {
+    cultoFeaturedGrid.appendChild(buildCultoPhotoButton(photo, index));
+  });
+
+  if (cultoCountEl) cultoCountEl.textContent = `(${cultoPhotos.length})`;
+
 }
 
-function showGallerySlide(index) {
-  const maxIndex = getMaxGalleryIndex();
-  galleryIndex = Math.min(Math.max(index, 0), maxIndex);
+// modal com todas as fotos (miniaturas carregadas sob demanda, só quando aberto)
+function openCultoModal() {
+  if (!cultoModal || !cultoModalThumbs) return;
 
-  galleryTrack.style.transform = `translateX(-${galleryIndex * (cachedCardWidth + cachedGap)}px)`;
+  if (!cultoModalThumbs.childElementCount) {
+    cultoPhotos.forEach((photo, index) => {
+      cultoModalThumbs.appendChild(buildCultoPhotoButton(photo, index));
+    });
+  }
 
-  galleryDotsContainer.querySelectorAll("button").forEach((dot, dotIndex) => {
-    const isActive = dotIndex === galleryIndex;
-    dot.classList.toggle("active", isActive);
-    dot.setAttribute("aria-current", isActive ? "true" : "false");
+  if (cultoModalTotal) cultoModalTotal.textContent = `${cultoPhotos.length} fotos`;
+
+  cultoModal.classList.add("open");
+  cultoModal.setAttribute("aria-hidden", "false");
+  lockScroll(true);
+}
+
+function closeCultoModal() {
+  if (!cultoModal) return;
+  cultoModal.classList.remove("open");
+  cultoModal.setAttribute("aria-hidden", "true");
+  if (!cultoViewer?.classList.contains("open")) lockScroll(false);
+}
+
+// visualizador de foto única, com navegação prev/next, teclado e swipe
+function updateCultoViewer() {
+  const photo = cultoPhotos[cultoViewerIndex];
+  if (!photo || !cultoViewerImg) return;
+  cultoViewerImg.src = photo.src;
+  cultoViewerImg.alt = photo.alt;
+  if (cultoViewerCounter) {
+    cultoViewerCounter.textContent = `${cultoViewerIndex + 1} de ${cultoPhotos.length}`;
+  }
+}
+
+function openCultoViewer(index) {
+  if (!cultoViewer || !cultoPhotos[index]) return;
+  cultoViewerIndex = index;
+  updateCultoViewer();
+  cultoViewer.classList.add("open");
+  cultoViewer.setAttribute("aria-hidden", "false");
+  lockScroll(true);
+}
+
+function showCultoViewer(delta) {
+  const total = cultoPhotos.length;
+  cultoViewerIndex = (cultoViewerIndex + delta + total) % total;
+  updateCultoViewer();
+}
+
+function closeCultoViewer() {
+  if (!cultoViewer) return;
+  cultoViewer.classList.remove("open");
+  cultoViewer.setAttribute("aria-hidden", "true");
+  if (cultoViewerImg) cultoViewerImg.src = "";
+  if (!cultoModal?.classList.contains("open")) lockScroll(false);
+}
+
+if (cultoOpenAllBtn) cultoOpenAllBtn.addEventListener("click", openCultoModal);
+if (cultoModalClose) cultoModalClose.addEventListener("click", closeCultoModal);
+if (cultoModal) {
+  cultoModal.addEventListener("click", (event) => {
+    if (event.target === cultoModal) closeCultoModal();
   });
 }
 
-function restartGallery() {
-  clearInterval(galleryTimer);
-  galleryTimer = setInterval(() => {
-    const maxIndex = getMaxGalleryIndex();
-    showGallerySlide(galleryIndex >= maxIndex ? 0 : galleryIndex + 1);
-  }, 5000);
-}
-
-function stopGallery() {
-  clearInterval(galleryTimer);
-  galleryTimer = null;
-}
-
-if (galleryTrack && galleryCards.length && galleryDotsContainer) {
-  const maxIndex = getMaxGalleryIndex();
-  const shouldShowDots = maxIndex <= 12;
-
-  if (shouldShowDots) {
-    galleryDotsContainer.hidden = false;
-    // um dot por POSIÇÃO possível, não por card
-    for (let i = 0; i <= maxIndex; i++) {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.setAttribute("aria-label", `Ir para posição ${i + 1}`);
-      dot.addEventListener("click", () => {
-        showGallerySlide(i);
-        restartGallery();
-      });
-      galleryDotsContainer.appendChild(dot);
-    }
-  } else {
-    galleryDotsContainer.hidden = true;
-  }
-
-  galleryCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const image = card.querySelector("img");
-      if (image) openLightbox("image", image.src, image.alt);
-    });
+if (cultoViewerClose) cultoViewerClose.addEventListener("click", closeCultoViewer);
+if (cultoViewerPrev) cultoViewerPrev.addEventListener("click", () => showCultoViewer(-1));
+if (cultoViewerNext) cultoViewerNext.addEventListener("click", () => showCultoViewer(1));
+if (cultoViewer) {
+  cultoViewer.addEventListener("click", (event) => {
+    if (event.target === cultoViewer) closeCultoViewer();
   });
+}
 
-  if (galleryPrev) {
-    galleryPrev.addEventListener("click", () => {
-      showGallerySlide(galleryIndex - 1);
-      restartGallery();
-    });
+document.addEventListener("keydown", (event) => {
+  if (cultoViewer && cultoViewer.classList.contains("open")) {
+    if (event.key === "Escape") closeCultoViewer();
+    if (event.key === "ArrowLeft") showCultoViewer(-1);
+    if (event.key === "ArrowRight") showCultoViewer(1);
+  } else if (cultoModal && cultoModal.classList.contains("open") && event.key === "Escape") {
+    closeCultoModal();
   }
+});
 
-  if (galleryNext) {
-    galleryNext.addEventListener("click", () => {
-      showGallerySlide(galleryIndex + 1);
-      restartGallery();
-    });
-  }
+// swipe no visualizador (mobile)
+let cultoTouchStartX = 0;
+if (cultoViewer) {
+  cultoViewer.addEventListener("touchstart", (event) => {
+    cultoTouchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
 
-  measureGallery();
-  showGallerySlide(0);
-  restartGallery();
-
-  // pausa o autoplay quando a galeria sai da tela (economiza ciclos)
-  if ("IntersectionObserver" in window) {
-    const galleryObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          restartGallery();
-        } else {
-          stopGallery();
-        }
-      });
-    }, { threshold: 0.2 });
-
-    galleryObserver.observe(galleryTrack);
-  }
-
-  // debounce no resize: recalcula medidas e reposiciona sem rajada de chamadas
-  let resizeTimeout = null;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      measureGallery();
-      showGallerySlide(galleryIndex);
-    }, 150);
+  cultoViewer.addEventListener("touchend", (event) => {
+    const deltaX = event.changedTouches[0].clientX - cultoTouchStartX;
+    if (Math.abs(deltaX) > 40) showCultoViewer(deltaX > 0 ? -1 : 1);
   }, { passive: true });
 }
 

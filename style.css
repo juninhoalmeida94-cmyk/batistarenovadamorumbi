@@ -115,7 +115,7 @@ header{
   place-items:center;
   padding:120px 32px 70px;
   color:var(--white);
-  background:var(--black);
+  background:var(--black) url("assets/celebracao-01.jpg") center top/cover no-repeat;
   overflow:hidden;
 }
 .hero::before{

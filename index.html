@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20260803-oracao">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
 <header>
   <nav class="nav">
     <a href="#topo" class="logo">
-      <img src="assets/logo-batista-renovada-morumbi.png" alt="Batista Renovada Morumbi" width="1200" height="630" decoding="async" fetchpriority="high">
+      <img src="assets/logo-batista-renovada-morumbi.png" alt="Batista Renovada Morumbi" width="831" height="300" decoding="async" fetchpriority="high">
     </a>
     <div class="navlinks">
       <a href="#sobre">Sobre Nós</a>
@@ -48,8 +48,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="topo">
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/celebracao-01.jpg">
-    <source src="assets/teste-pibr-m.mov" type="video/quicktime">
+  <video class="hero-video" autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="metadata" poster="assets/celebracao-01.jpg">
     <source src="assets/presenca-de-deus.mp4" type="video/mp4">
   </video>
   <div class="hero-video-controls" aria-label="Controles do vídeo">
@@ -120,39 +119,75 @@
 
 <div class="line"></div>
 
-<!-- ============ GALERIA ============ -->
-<section class="section gallery-section" id="galeria">
+<!-- ============ ASSISTA AO CULTO ============ -->
+<section class="section watch-section" id="assista">
   <div class="wrap">
-    <div class="s-head">
-      <div class="eyebrow">Momentos da igreja</div>
-      <h2>Domingo de celebração, presença e renovo</h2>
-      <p>Registros de adoração, comunhão e entrega em nossa comunidade.</p>
-    </div>
-
-    <div class="gallery-carousel" aria-label="Carrossel de fotos da igreja">
-      <div class="gallery-track">
-        <figure class="photo-card">
-          <img src="assets/celebracao-01.jpg" alt="Celebração na Igreja Batista Renovada Morumbi" loading="lazy" decoding="async" width="1080" height="1350">
-        </figure>
-        <figure class="photo-card">
-          <img src="assets/celebracao-02.jpg" alt="Momento de oração na Igreja Batista Renovada Morumbi" loading="lazy" decoding="async" width="1080" height="1350">
-        </figure>
-        <figure class="photo-card">
-          <img src="assets/celebracao-03.jpg" alt="Pessoas adorando na Igreja Batista Renovada Morumbi" loading="lazy" decoding="async" width="1080" height="1350">
-        </figure>
-        <figure class="photo-card">
-          <img src="assets/adoracao-01.jpg" alt="Ministério de adoração da Igreja Batista Renovada Morumbi" loading="lazy" decoding="async" width="1080" height="1350">
-        </figure>
-        <figure class="photo-card">
-          <img src="assets/culto-violao-01.jpeg" alt="Ministro de louvor conduzindo adoração na Igreja Batista Renovada Morumbi" loading="lazy" decoding="async" width="720" height="1280">
-        </figure>
+    <div class="watch-grid">
+      <div class="watch-copy">
+        <div class="eyebrow">Culto em vídeo</div>
+        <h2>Não pôde vir? Assista ao nosso último culto</h2>
+        <p>Reviva os momentos de louvor, palavra e comunhão da nossa igreja, onde quer que você esteja.</p>
+        <button type="button" class="btn btn-outline watch-trigger" data-video-src="assets/culto-video.mp4" data-video-poster="assets/culto-poster.jpg">
+          Assistir agora
+          <i class="fas fa-play" aria-hidden="true"></i>
+        </button>
       </div>
-      <button class="gallery-btn gallery-btn-prev" type="button" aria-label="Foto anterior">‹</button>
-      <button class="gallery-btn gallery-btn-next" type="button" aria-label="Próxima foto">›</button>
-      <div class="gallery-dots" aria-label="Controle do carrossel"></div>
+      <div class="watch-media">
+        <button type="button" class="watch-thumb watch-trigger" data-video-src="assets/culto-video.mp4" data-video-poster="assets/culto-poster.jpg" aria-label="Assistir ao culto completo">
+          <img src="assets/culto-poster.jpg" alt="Prévia do culto de celebração" width="480" height="854" loading="lazy" decoding="async">
+          <span class="watch-play-icon"><i class="fas fa-play" aria-hidden="true"></i></span>
+          <span class="watch-duration">3:21</span>
+        </button>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="line"></div>
+
+<!-- ============ GALERIA: FOTOS DO ÚLTIMO CULTO ============ -->
+<section class="section gallery-section" id="galeria">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="eyebrow">Fotos do último culto</div>
+      <h2>Reviva os melhores momentos</h2>
+      <p>Uma seleção de fotos do nosso último encontro. Veja a galeria completa com todos os registros.</p>
+    </div>
+
+    <div class="culto-grid" id="cultoFeaturedGrid" aria-label="Fotos em destaque do último culto"></div>
+
+    <div class="culto-more">
+      <button type="button" class="btn btn-outline" id="cultoOpenAll">
+        Ver todas as fotos <span class="culto-count" id="cultoCount"></span>
+        <i class="fas fa-images" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Modal: grade com TODAS as fotos do culto -->
+<div class="culto-modal" id="cultoModal" aria-hidden="true" role="dialog" aria-label="Galeria completa do último culto">
+  <div class="culto-modal-head">
+    <div>
+      <div class="eyebrow">Fotos do último culto</div>
+      <h3 id="cultoModalTotal"></h3>
+    </div>
+    <button type="button" class="culto-modal-close" id="cultoModalClose" aria-label="Fechar galeria">×</button>
+  </div>
+  <div class="culto-modal-thumbs" id="cultoModalThumbs"></div>
+</div>
+
+<!-- Visualizador: foto ampliada com navegação -->
+<div class="culto-viewer" id="cultoViewer" aria-hidden="true" role="dialog" aria-label="Visualizador de foto">
+  <button type="button" class="culto-viewer-close" id="cultoViewerClose" aria-label="Fechar visualizador">×</button>
+  <button type="button" class="culto-viewer-nav culto-viewer-prev" id="cultoViewerPrev" aria-label="Foto anterior">‹</button>
+  <div class="culto-viewer-stage">
+    <img id="cultoViewerImg" src="" alt="">
+    <div class="culto-viewer-counter" id="cultoViewerCounter"></div>
+  </div>
+  <button type="button" class="culto-viewer-nav culto-viewer-next" id="cultoViewerNext" aria-label="Próxima foto">›</button>
+</div>
+
 
 <div class="lightbox" aria-hidden="true" role="dialog" aria-label="Imagem ampliada">
   <button class="lightbox-close" type="button" aria-label="Fechar lightbox">×</button>
@@ -248,7 +283,7 @@
 <section class="section section-bone" id="eventos">
   <div class="wrap">
     <div class="s-head">
-      <divgi class="eyebrow">Próximas datas</div>
+      <div class="eyebrow">Próximas datas</div>
       <h2>Agenda da igreja</h2>
       <p>Acompanhe os próximos encontros, retiros e celebrações da nossa comunidade.</p>
     </div>
@@ -356,7 +391,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a href="#topo" class="logo">
-          <img src="assets/logo-batista-renovada-morumbi.png" alt="Batista Renovada Morumbi" loading="lazy" decoding="async" width="1200" height="630">
+          <img src="assets/logo-batista-renovada-morumbi.png" alt="Batista Renovada Morumbi" loading="lazy" decoding="async" width="831" height="300">
         </a>
         <p>Uma comunidade de fé dedicada à Palavra, à adoração e ao cuidado mútuo, no coração do Morumbi.</p>
       </div>
@@ -391,6 +426,7 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=20260803-fix2"></script>
 </body>
 </html>
+

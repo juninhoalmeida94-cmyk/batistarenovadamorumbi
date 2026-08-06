@@ -100,6 +100,11 @@ function safePlay(video) {
 if (heroVideo) {
   heroVideo.muted = true;
 
+  heroVideo.addEventListener("error", () => {
+    heroVideo.style.display = "none";
+    document.querySelector(".hero-video-controls")?.style.setProperty("display", "none");
+  }, true);
+
   heroVideo.addEventListener("click", () => {
     const source = heroVideo.querySelector("source");
     const videoSource = heroVideo.currentSrc || source?.src;

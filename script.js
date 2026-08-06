@@ -133,6 +133,17 @@ if (heroVideo && videoPauseButton) {
 }
 
 /* =========================================================
+   ASSISTA AO CULTO (vídeo sob demanda, via lightbox)
+========================================================= */
+document.querySelectorAll(".watch-trigger").forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    const videoSrc = trigger.dataset.videoSrc;
+    const videoPoster = trigger.dataset.videoPoster || "";
+    if (videoSrc) openLightbox("video", videoSrc, videoPoster);
+  });
+});
+
+/* =========================================================
    GALERIA / CARROSSEL
 ========================================================= */
 const galleryTrack = document.querySelector(".gallery-track");
@@ -279,6 +290,7 @@ function openLightbox(type, src, alt = "") {
     video.controls = true;
     video.autoplay = true;
     video.playsInline = true;
+    if (alt) video.poster = alt;
     lightboxContent.appendChild(video);
     safePlay(video);
   } else {

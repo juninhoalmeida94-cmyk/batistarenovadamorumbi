@@ -271,6 +271,65 @@ header{
 .cells-card h3{font-size:30px;margin-bottom:16px;}
 .cells-card p{color:#aaa;font-size:15px;line-height:1.7;}
 
+/* ============ ASSISTA AO CULTO ============ */
+.watch-section{background:var(--white);}
+.watch-grid{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center;
+}
+.watch-copy h2{font-size:clamp(32px,4vw,44px);margin:18px 0 20px;}
+.watch-copy p{max-width:480px;color:var(--grey);font-size:17px;line-height:1.75;margin-bottom:32px;}
+.watch-trigger{background:none;}
+.watch-trigger i{font-size:11px;}
+
+.watch-media{display:flex;justify-content:center;}
+.watch-thumb{
+  position:relative;
+  display:block;
+  width:100%;
+  max-width:320px;
+  aspect-ratio:9/16;
+  overflow:hidden;
+  border:1px solid var(--ink);
+  background:var(--black);
+  padding:0;
+  cursor:pointer;
+}
+.watch-thumb img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .5s ease, filter .5s ease;
+}
+.watch-thumb:hover img{transform:scale(1.04);filter:saturate(1.08);}
+.watch-play-icon{
+  position:absolute;
+  inset:0;
+  display:grid;place-items:center;
+  z-index:2;
+}
+.watch-play-icon i{
+  display:grid;place-items:center;
+  width:64px;height:64px;
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:50%;
+  background:rgba(0,0,0,.34);
+  backdrop-filter:blur(10px);
+  color:var(--white);
+  font-size:20px;
+  transition:background .25s ease, color .25s ease, transform .25s ease;
+}
+.watch-thumb:hover .watch-play-icon i{background:var(--white);color:var(--ink);transform:scale(1.08);}
+.watch-duration{
+  position:absolute;
+  right:14px;bottom:14px;
+  z-index:2;
+  font-family:var(--mono);
+  font-size:12px;font-weight:600;
+  letter-spacing:.04em;
+  color:var(--white);
+  background:rgba(0,0,0,.5);
+  padding:5px 10px;
+}
+
 /* ============ GALERIA ============ */
 .gallery-section{background:var(--white);}
 .gallery-carousel{
@@ -662,6 +721,10 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .hero .wrap{width:100%;}
   .about-grid{grid-template-columns:1fr;gap:50px;}
   .cells-grid{grid-template-columns:1fr;gap:48px;}
+  .watch-grid{grid-template-columns:1fr;gap:40px;text-align:center;}
+  .watch-copy{display:flex;flex-direction:column;align-items:center;}
+  .watch-copy p{margin-left:auto;margin-right:auto;}
+  .watch-thumb{max-width:260px;}
   .gallery-carousel{padding:0 48px 44px;}
   .photo-card{flex-basis:calc((100% - 18px) / 2);}
   .ministries-hero{min-height:76vh;padding:120px 24px 90px;}

@@ -235,6 +235,7 @@ header{
 .section-black .s-head p{color:#a8a8a8;}
 
 /* ============ SOBRE ============ */
+#sobre{padding-top:80px;padding-bottom:32px;}
 .about-grid{
   display:grid;grid-template-columns:minmax(0, 1fr);align-items:start;
 }
@@ -247,38 +248,49 @@ header{
 .verse-block p{font-family:var(--display);font-style:italic;font-size:18px;line-height:1.6;}
 .verse-block cite{font-family:var(--mono);font-size:12px;font-style:normal;text-transform:uppercase;letter-spacing:0.08em;color:var(--grey);display:block;margin-top:10px;}
 
-.schedule-program{width:100%;}
-.schedule-program .eyebrow{margin-bottom:18px;}
-.schedule-program > h2{font-size:clamp(36px,5vw,58px);}
-.schedule-list{margin-top:56px;border-top:1px solid var(--ink);}
+.schedule-program{
+  width:min(580px,100%);
+  margin:0 auto;
+  padding:40px;
+  border:1px solid #e8e8e5;
+  border-radius:6px;
+  background:#fafaf9;
+}
+.schedule-program .eyebrow{margin-bottom:14px;}
+.schedule-program > h2{font-size:clamp(34px,4vw,46px);}
+.schedule-program > h2 em{font-weight:500;}
+.schedule-list{display:grid;gap:12px;margin-top:30px;}
 .schedule-item{
   display:grid;
-  grid-template-columns:minmax(0,35fr) minmax(0,65fr);
-  gap:48px;
-  padding:46px 0;
-  border-bottom:1px solid var(--line);
+  grid-template-columns:128px minmax(0,1fr);
+  gap:20px;
+  padding:20px 22px;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:var(--white);
 }
 .schedule-day{
-  font-family:var(--display);
-  font-size:clamp(22px,2.5vw,30px);
-  font-weight:500;
-  line-height:1.15;
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.08em;
+  line-height:1.3;
   text-transform:uppercase;
 }
 .schedule-time{
-  margin-bottom:8px;
+  margin-top:7px;
   font-family:var(--mono);
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.1em;
+  font-size:11px;
+  color:var(--grey);
+  letter-spacing:.08em;
 }
-.schedule-details h3{font-size:clamp(27px,3vw,38px);font-weight:500;}
-.schedule-description{margin-top:10px;color:var(--grey);font-size:15px;}
-.schedule-notes{margin-top:24px;color:var(--grey);font-size:14px;line-height:1.8;}
+.schedule-details h3{font-size:22px;font-weight:500;}
+.schedule-description{margin-top:7px;color:var(--grey);font-size:13px;}
+.schedule-notes{margin-top:14px;color:var(--grey);font-size:12px;line-height:1.65;}
 .schedule-tag,
 .schedule-link{
   display:inline-block;
-  margin-top:28px;
+  margin-top:16px;
   font-family:var(--mono);
   font-size:10px;
   font-weight:600;
@@ -286,7 +298,7 @@ header{
   text-transform:uppercase;
 }
 .schedule-tag{color:var(--grey);}
-.schedule-link{margin-left:24px;border-bottom:1px solid var(--ink);padding-bottom:3px;}
+.schedule-link{margin-left:16px;border-bottom:1px solid var(--ink);padding-bottom:3px;}
 .schedule-link:hover{border-bottom-color:transparent;}
 /* ============ CÉLULAS ============ */
 .cells-section{background-color:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -300,6 +312,7 @@ header{
 
 /* ============ ASSISTA AO CULTO ============ */
 .watch-section{background-color:var(--white);}
+#assista{padding-top:50px;}
 .watch-grid{
   display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center;
 }
@@ -645,6 +658,7 @@ header{
 .min-line{width:100%;height:1px;background:var(--line);margin:24px 0 0;}
 
 /* ============ EVENTOS ============ */
+#eventos{padding-top:40px;padding-bottom:40px;}
 .s-head .events-title{
   display:flex;
   width:fit-content;
@@ -834,6 +848,23 @@ header{
   outline:2px solid var(--white);
   outline-offset:3px;
 }
+#oracao .prayer-section{min-height:0;}
+#oracao .prayer-text,
+#oracao .prayer-form{padding-top:20px;padding-bottom:20px;}
+#oracao .prayer-text h2{margin-bottom:20px;}
+#oracao .prayer-text p{margin-bottom:28px;}
+#oracao .prayer-quote span{margin-top:8px;}
+#oracao .field{margin-bottom:16px;}
+#oracao .field label{margin-bottom:6px;}
+#oracao .field input,
+#oracao .field textarea,
+#oracao .field select{padding-top:4px;padding-bottom:8px;}
+#oracao .field textarea{height:52px;min-height:52px;}
+#oracao .choice-field{margin-bottom:16px;}
+#oracao .choice-field legend{margin-bottom:10px;}
+#oracao .choice-field label{margin-bottom:4px;}
+#oracao #prayer-form > .field:last-of-type{margin-bottom:8px;}
+#oracao .form-submit{margin-top:0;}
 .form-error{
   display:none;
   margin-top:10px;
@@ -946,6 +977,8 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .prayer-section{grid-template-columns:1fr;}
   .prayer-text{padding:90px 32px 60px;border-right:none;border-bottom:1px solid var(--line-dark);}
   .prayer-form{padding:60px 32px 90px;}
+  #oracao .prayer-text,
+  #oracao .prayer-form{padding-top:60px;padding-bottom:60px;}
   #formulario-celulas .prayer-text,
   #formulario-celulas .prayer-form{padding-top:64px;padding-bottom:64px;}
   .contact-grid{grid-template-columns:1fr;gap:56px;}
@@ -956,13 +989,17 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
 @media (max-width:600px){
   .wrap{padding:0 20px;}
   .section{padding:80px 0;}
-  .schedule-list{margin-top:40px;}
-  .schedule-item{grid-template-columns:1fr;gap:18px;padding:34px 0;}
-  .schedule-day{font-size:23px;}
-  .schedule-details h3{font-size:29px;}
-  .schedule-notes{margin-top:20px;}
-  .schedule-tag,.schedule-link{margin-top:24px;}
-  .schedule-link{margin-left:18px;}
+  #sobre .wrap{padding:0 16px;}
+  #sobre{padding-top:56px;padding-bottom:28px;}
+  #eventos{padding-top:36px;padding-bottom:40px;}
+  .schedule-program{padding:24px 18px;}
+  .schedule-list{margin-top:26px;}
+  .schedule-item{grid-template-columns:96px minmax(0,1fr);gap:14px;padding:18px 16px;}
+  .schedule-day{font-size:10px;}
+  .schedule-details h3{font-size:20px;}
+  .schedule-notes{margin-top:12px;}
+  .schedule-tag,.schedule-link{margin-top:16px;}
+  .schedule-link{margin-left:0;display:block;width:fit-content;}
   .hero{padding:110px 20px 64px;}
   .hero{background-position:center center;}
   .hero h1{margin-bottom:24px;font-size:clamp(38px,11.5vw,48px);}
@@ -972,6 +1009,11 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .hero-meta{flex-direction:column;gap:12px;padding-top:18px;}
   .cells-card{min-height:300px;padding:32px;}
   .prayer-form-row{grid-template-columns:1fr;gap:0;}
+  #oracao .field{margin-bottom:22px;}
+  #oracao .field label{margin-bottom:8px;}
+  #oracao .field textarea{height:60px;min-height:60px;}
+  #oracao .choice-field{margin-bottom:22px;}
+  #oracao #prayer-form > .field:last-of-type{margin-bottom:12px;}
   .prayer-form .btn{width:100%;justify-content:center;}
   .choice-field label{margin-right:24px;}
   .culto-grid{grid-template-columns:repeat(2, 1fr);gap:10px;}

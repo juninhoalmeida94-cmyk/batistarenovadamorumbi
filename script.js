@@ -1,4 +1,18 @@
 /* =========================================================
+   POSIÇÃO INICIAL DA PÁGINA
+========================================================= */
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+if (window.location.hash) {
+  history.replaceState(history.state, "", `${window.location.pathname}${window.location.search}`);
+}
+
+window.scrollTo(0, 0);
+window.addEventListener("load", () => window.scrollTo(0, 0), { once: true });
+
+/* =========================================================
    MENU MOBILE
 ========================================================= */
 const burger = document.querySelector(".burger");

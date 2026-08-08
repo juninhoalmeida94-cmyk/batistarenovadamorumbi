@@ -97,15 +97,10 @@ if (prayerIframe) {
 /* =========================================================
    FORMULÁRIO DE CÉLULAS
 ========================================================= */
-const cellsOpenModal = document.querySelector("#cells-open-modal");
-const cellsModal = document.querySelector("#cells-modal");
-const cellsModalClose = document.querySelector("#cells-modal-close");
 const cellsForm = document.querySelector("#cells-form");
 const cellsIframe = document.querySelector("#hidden_iframe_cells");
 const cellsSuccess = document.querySelector("#cells-success");
 let cellsSubmitting = false;
-let cellsPreviousFocus = null;
-let cellsPreviousBodyOverflow = "";
 
 function completeCellsSubmission() {
   if (!cellsSubmitting) return;
@@ -114,68 +109,24 @@ function completeCellsSubmission() {
   showFormSuccess(cellsSuccess, "Recebemos seus dados! Em breve entraremos em contato para ajudar você a encontrar uma célula.");
 }
 
-function openCellsModal() {
-  if (!cellsModal) return;
-  cellsPreviousFocus = document.activeElement;
-  cellsPreviousBodyOverflow = document.body.style.overflow;
-  cellsModal.classList.add("open");
-  cellsModal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-  setTimeout(() => document.querySelector("#cells-name-phone")?.focus(), 80);
-}
-
-function closeCellsModal() {
-  if (!cellsModal) return;
-  cellsModal.classList.remove("open");
-  cellsModal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = cellsPreviousBodyOverflow;
-  if (cellsPreviousFocus instanceof HTMLElement) cellsPreviousFocus.focus();
-}
-
-if (cellsOpenModal) cellsOpenModal.addEventListener("click", openCellsModal);
-if (cellsModalClose) cellsModalClose.addEventListener("click", closeCellsModal);
-if (cellsModal) {
-  cellsModal.addEventListener("click", (event) => {
-    if (event.target === cellsModal) closeCellsModal();
-  });
-}
-
-document.addEventListener("keydown", (event) => {
-  if (!cellsModal?.classList.contains("open")) return;
-
-  if (event.key === "Escape") {
-    closeCellsModal();
-    return;
-  }
-
-  if (event.key === "Tab") {
-    const focusable = [...cellsModal.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href]')];
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  }
-});
-
 if (cellsForm) {
   cellsForm.addEventListener("submit", (event) => {
     if (cellsSuccess) cellsSuccess.style.display = "none";
 
     const validations = [
-      ["#cells-error-name-phone", hasValue("#cells-name-phone")],
-      ["#cells-error-address", hasValue("#cells-address")]
+      ["#cells-error-name-phone", "#cells-name-phone", hasValue("#cells-name-phone")],
+      ["#cells-error-address", "#cells-address", hasValue("#cells-address")]
     ];
 
-    validations.forEach(([errorId, valid]) => showFieldError(errorId, !valid));
+    validations.forEach(([errorId, fieldSelector, valid]) => {
+      showFieldError(errorId, !valid);
+      document.querySelector(fieldSelector)?.setAttribute("aria-invalid", String(!valid));
+    });
 
-    if (validations.some(([, valid]) => !valid)) {
+    const firstInvalid = validations.find(([, , valid]) => !valid);
+    if (firstInvalid) {
       event.preventDefault();
+      document.querySelector(firstInvalid[1])?.focus();
       return;
     }
 

@@ -632,6 +632,7 @@ header{
 }
 
 /* ============ ORAÇÃO ============ */
+#formulario-celulas{scroll-margin-top:96px;}
 .prayer-section{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -803,65 +804,6 @@ header{
   border-color:var(--white);
 }
 
-/* ============ MODAL CÉLULAS ============ */
-.cells-modal{
-  position:fixed;
-  inset:0;
-  z-index:360;
-  display:none;
-  place-items:center;
-  padding:28px;
-  background:rgba(0,0,0,.72);
-  overflow-y:auto;
-  overscroll-behavior:contain;
-}
-.cells-modal.open{
-  display:grid;
-  animation:cells-overlay-in .24s ease both;
-}
-.cells-modal-panel{
-  position:relative;
-  width:min(560px,100%);
-  max-height:calc(100vh - 56px);
-  overflow:auto;
-  background:#141416;
-  color:var(--white);
-  border:1px solid var(--line-dark);
-  padding:48px;
-  box-shadow:0 28px 90px rgba(0,0,0,.5);
-  animation:cells-panel-in .28s cubic-bezier(.2,.75,.25,1) both;
-}
-@keyframes cells-overlay-in{from{opacity:0}to{opacity:1}}
-@keyframes cells-panel-in{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
-.cells-modal-close{
-  position:absolute;
-  top:16px;
-  right:16px;
-  width:40px;
-  height:40px;
-  border:1px solid var(--line-dark);
-  border-radius:50%;
-  background:transparent;
-  color:var(--white);
-  font-size:28px;
-  line-height:1;
-  cursor:pointer;
-}
-.cells-modal-close:hover,
-.cells-modal-close:focus-visible{background:var(--white);color:#141416;outline:none;}
-.cells-modal h3{
-  margin:18px 0 16px;
-  font-size:clamp(30px,4vw,44px);
-}
-.cells-modal p{
-  margin-bottom:34px;
-  color:#a3a1a0;
-  line-height:1.7;
-}
-.field-light input{
-  color:var(--white);
-}
-
 /* ============ CONTATO ============ */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
 .contact-info .item{padding:26px 0;border-top:1px solid var(--line);}
@@ -947,7 +889,6 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .prayer-section{grid-template-columns:1fr;}
   .prayer-text{padding:90px 32px 60px;border-right:none;border-bottom:1px solid var(--line-dark);}
   .prayer-form{padding:60px 32px 90px;}
-  .cells-modal-panel{padding:42px 32px;}
   .contact-grid{grid-template-columns:1fr;gap:56px;}
   .footer-top{grid-template-columns:1fr 1fr;gap:40px;}
   .event-row{grid-template-columns:80px 1fr;}
@@ -963,10 +904,8 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .video-control{min-width:40px;width:40px;height:40px;font-size:16px;}
   .hero-meta{flex-direction:column;gap:12px;}
   .cells-card{min-height:300px;padding:32px;}
-  .cells-modal{padding:14px;}
-  .cells-modal-panel{max-height:calc(100vh - 28px);padding:38px 22px 28px;}
   .prayer-form-row{grid-template-columns:1fr;gap:0;}
-  .cells-modal .btn,.prayer-form .btn{width:100%;justify-content:center;}
+  .prayer-form .btn{width:100%;justify-content:center;}
   .choice-field label{margin-right:24px;}
   .culto-grid{grid-template-columns:repeat(2, 1fr);gap:10px;}
   .culto-modal-thumbs{grid-template-columns:repeat(3, 1fr);padding:20px 20px 40px;}

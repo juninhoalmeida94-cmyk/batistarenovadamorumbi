@@ -202,7 +202,7 @@
         <div class="eyebrow">Comunhão durante a semana</div>
         <h2 id="cells-title">Células</h2>
         <p>Um espaço de comunhão, discipulado e crescimento espiritual. Encontre uma célula, participe de um pequeno grupo e caminhe mais perto de Deus e de pessoas.</p>
-        <button type="button" class="btn btn-solid" id="cells-open-modal">Quero participar</button>
+        <a href="#formulario-celulas" class="btn btn-solid">Quero participar</a>
       </div>
       <div class="cells-card" aria-label="Informações das células">
         <span class="cells-number">01</span>
@@ -215,37 +215,43 @@
   </div>
 </section>
 
-<div class="cells-modal" id="cells-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cells-modal-title">
-  <div class="cells-modal-panel" role="document">
-    <button type="button" class="cells-modal-close" id="cells-modal-close" aria-label="Fechar formulário">×</button>
-    <div class="eyebrow">Células</div>
-    <h3 id="cells-modal-title">Encontre uma célula perto de você</h3>
-    <p>Preencha seus dados e nossa equipe entrará em contato para ajudar você a participar de um pequeno grupo.</p>
-    <form
-      id="cells-form"
-      action="https://docs.google.com/forms/d/e/1FAIpQLSeO8hPmji3dxAWE_GnB0dT6MgFErzdc9hiT0qZGAuZpbZx-kg/formResponse"
-      method="POST"
-      target="hidden_iframe_cells"
-      novalidate>
-      <div class="field field-light">
-        <label for="cells-name-phone">Nome e Telefone (WhatsApp)</label>
-        <input type="text" id="cells-name-phone" name="entry.297279511" placeholder="Seu nome e WhatsApp" required autocomplete="name">
-        <div class="form-error" id="cells-error-name-phone">Preencha seu nome e WhatsApp</div>
+<section class="section-black" id="formulario-celulas" aria-labelledby="cells-form-title">
+  <div class="prayer-section">
+    <div class="prayer-text">
+      <div class="eyebrow">Faça parte</div>
+      <h2 id="cells-form-title">Encontre uma célula<br>perto de você</h2>
+      <p>Preencha seus dados e nossa equipe entrará em contato para ajudar você a encontrar uma célula e participar de um pequeno grupo.</p>
+      <div class="prayer-quote">
+        Comunhão transforma encontros em vínculos e fortalece nossa caminhada de fé.
       </div>
-      <div class="field field-light">
-        <label for="cells-address">Endereço/bairro</label>
-        <input type="text" id="cells-address" name="entry.1608497250" placeholder="Seu bairro ou endereço" required autocomplete="street-address">
-        <div class="form-error" id="cells-error-address">Preencha seu endereço ou bairro</div>
-      </div>
-      <div class="form-submit">
-        <button type="submit" class="btn btn-prayer">Quero participar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
-      </div>
-      <p class="form-success" id="cells-success" role="status" aria-live="polite"></p>
-    </form>
+    </div>
+    <div class="prayer-form">
+      <form
+        id="cells-form"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSeO8hPmji3dxAWE_GnB0dT6MgFErzdc9hiT0qZGAuZpbZx-kg/formResponse"
+        method="POST"
+        target="hidden_iframe_cells"
+        novalidate>
+        <div class="field">
+          <label for="cells-name-phone">Nome e Telefone (WhatsApp) <span class="required-mark" aria-hidden="true">*</span></label>
+          <input type="text" id="cells-name-phone" name="entry.297279511" placeholder="Seu nome e WhatsApp" required autocomplete="name">
+          <div class="form-error" id="cells-error-name-phone">Preencha seu nome e WhatsApp</div>
+        </div>
+        <div class="field">
+          <label for="cells-address">Endereço/bairro <span class="required-mark" aria-hidden="true">*</span></label>
+          <input type="text" id="cells-address" name="entry.1608497250" placeholder="Seu bairro ou endereço" required autocomplete="street-address">
+          <div class="form-error" id="cells-error-address">Preencha seu endereço ou bairro</div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-prayer">Quero participar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="form-success" id="cells-success" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- ============ HERO MINISTÉRIOS ============ -->
 <section class="ministries-hero" id="ministerios" aria-labelledby="ministries-hero-title">

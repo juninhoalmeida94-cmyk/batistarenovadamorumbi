@@ -202,7 +202,7 @@
         <div class="eyebrow">Comunhão durante a semana</div>
         <h2 id="cells-title">Células</h2>
         <p>Um espaço de comunhão, discipulado e crescimento espiritual. Encontre uma célula, participe de um pequeno grupo e caminhe mais perto de Deus e de pessoas.</p>
-        <a href="https://wa.me/5544991422101?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20as%20c%C3%A9lulas." class="btn btn-solid" target="_blank" rel="noopener">Quero participar</a>
+        <button type="button" class="btn btn-solid" id="cells-open-modal">Quero participar</button>
       </div>
       <div class="cells-card" aria-label="Informações das células">
         <span class="cells-number">01</span>
@@ -214,6 +214,38 @@
     </div>
   </div>
 </section>
+
+<div class="cells-modal" id="cells-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cells-modal-title">
+  <div class="cells-modal-panel" role="document">
+    <button type="button" class="cells-modal-close" id="cells-modal-close" aria-label="Fechar formulário">×</button>
+    <div class="eyebrow">Células</div>
+    <h3 id="cells-modal-title">Encontre uma célula perto de você</h3>
+    <p>Preencha seus dados e nossa equipe entrará em contato para ajudar você a participar de um pequeno grupo.</p>
+    <form
+      id="cells-form"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSeO8hPmji3dxAWE_GnB0dT6MgFErzdc9hiT0qZGAuZpbZx-kg/formResponse"
+      method="POST"
+      target="hidden_iframe_cells"
+      novalidate>
+      <div class="field field-light">
+        <label for="cells-name-phone">Nome e Telefone (WhatsApp)</label>
+        <input type="text" id="cells-name-phone" name="entry.297279511" placeholder="Seu nome e WhatsApp" required autocomplete="name">
+        <div class="form-error" id="cells-error-name-phone">Preencha seu nome e WhatsApp</div>
+      </div>
+      <div class="field field-light">
+        <label for="cells-address">Endereço/bairro</label>
+        <input type="text" id="cells-address" name="entry.1608497250" placeholder="Seu bairro ou endereço" required autocomplete="street-address">
+        <div class="form-error" id="cells-error-address">Preencha seu endereço ou bairro</div>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn btn-prayer">Quero participar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+      <p class="form-success" id="cells-success" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
 
 <!-- ============ HERO MINISTÉRIOS ============ -->
 <section class="ministries-hero" id="ministerios" aria-labelledby="ministries-hero-title">
@@ -315,30 +347,78 @@
       </div>
     </div>
     <div class="prayer-form">
-      <form id="prayer-form" novalidate>
+      <form
+        id="prayer-form"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSfSZEJZww49PGWFHKzcDvwUEwvu_PvyDHX21F7j_cZe5fICQg/formResponse"
+        method="POST"
+        target="hidden_iframe_prayer"
+        novalidate>
         <div class="field">
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" name="nome" placeholder="Seu nome" required autocomplete="name">
-          <div class="form-error" id="erro-nome">Preencha seu nome</div>
+          <label for="oracao-whatsapp">WhatsApp</label>
+          <input type="tel" id="oracao-whatsapp" name="entry.2025967470" placeholder="(44) 99999-9999" required autocomplete="tel">
+          <div class="form-error" id="erro-whatsapp">Informe um WhatsApp válido</div>
         </div>
         <div class="field">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email">
+          <label for="oracao-nome">Nome completo</label>
+          <input type="text" id="oracao-nome" name="entry.606251901" placeholder="Seu nome completo" required autocomplete="name">
+          <div class="form-error" id="erro-nome">Preencha seu nome completo</div>
         </div>
         <div class="field">
-          <label for="pedido">Seu pedido</label>
-          <textarea id="pedido" name="pedido" placeholder="Compartilhe o que está em seu coração..." required></textarea>
+          <label for="pedido">Qual seu pedido de oração?</label>
+          <textarea id="pedido" name="entry.765707895" placeholder="Compartilhe o que está em seu coração..." required></textarea>
           <div class="form-error" id="erro-pedido">Escreva seu pedido</div>
+        </div>
+        <div class="field">
+          <label for="pedido-area">Pedido na área de:</label>
+          <select id="pedido-area" name="entry.1092934507" required>
+            <option value="">Selecione uma opção</option>
+            <option value="Saúde Mental">Saúde Mental</option>
+            <option value="Cura Física">Cura Física</option>
+            <option value="Área Financeira">Área Financeira</option>
+            <option value="Área Espiritual">Área Espiritual</option>
+            <option value="Área Familiar">Área Familiar</option>
+          </select>
+          <div class="form-error" id="erro-area">Escolha uma área</div>
+        </div>
+        <div class="field">
+          <label for="oracao-idade">Qual sua idade?</label>
+          <input type="text" id="oracao-idade" name="entry.761476343" placeholder="Sua idade" required inputmode="numeric">
+          <div class="form-error" id="erro-idade">Informe sua idade</div>
+        </div>
+        <div class="field">
+          <label for="oracao-cristao">Você é cristão? Qual igreja você frequenta?</label>
+          <input type="text" id="oracao-cristao" name="entry.2108663863" placeholder="Conte brevemente" required>
+          <div class="form-error" id="erro-cristao">Preencha esta informação</div>
+        </div>
+        <div class="field">
+          <label for="oracao-bairro">Bairro e cidade que mora?</label>
+          <input type="text" id="oracao-bairro" name="entry.2107193648" placeholder="Bairro e cidade" required autocomplete="address-level2">
+          <div class="form-error" id="erro-bairro">Informe seu bairro e cidade</div>
+        </div>
+        <fieldset class="field choice-field">
+          <legend>Gostaria que alguém da nossa equipe entrasse em contato com você?</legend>
+          <label><input type="radio" name="entry.270962273" value="Sim" required> Sim</label>
+          <label><input type="radio" name="entry.270962273" value="Não" required> Não</label>
+          <div class="form-error" id="erro-contato">Escolha uma opção</div>
+        </fieldset>
+        <div class="field">
+          <label for="oracao-celula">Você está frequentando alguma CÉLULA da Igreja Batista Renovada?</label>
+          <input type="text" id="oracao-celula" name="entry.651909894" placeholder="Sim, não ou qual célula" required>
+          <div class="form-error" id="erro-celula">Preencha esta informação</div>
         </div>
         <div class="form-submit">
           <button type="submit" class="btn btn-prayer">Enviar pedido
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
         </div>
+        <p class="form-success" id="prayer-success" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>
 </section>
+
+<iframe name="hidden_iframe_prayer" id="hidden_iframe_prayer" class="hidden-iframe" title="Envio do pedido de oração"></iframe>
+<iframe name="hidden_iframe_cells" id="hidden_iframe_cells" class="hidden-iframe" title="Envio do formulário de células"></iframe>
 
 <!-- ============ CONTATO ============ -->
 <section class="section" id="contato">

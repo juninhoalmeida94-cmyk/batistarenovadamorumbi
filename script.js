@@ -24,33 +24,141 @@ if (burger && mobileOverlay) {
    FORMULÁRIO DE ORAÇÃO
 ========================================================= */
 const prayerForm = document.querySelector("#prayer-form");
+const prayerIframe = document.querySelector("#hidden_iframe_prayer");
+const prayerSuccess = document.querySelector("#prayer-success");
+let prayerSubmitting = false;
+
+function showFieldError(errorId, show) {
+  const error = document.querySelector(errorId);
+  if (error) error.style.display = show ? "block" : "none";
+}
+
+function hasValue(selector) {
+  return Boolean(document.querySelector(selector)?.value.trim());
+}
+
+function isValidWhatsapp(value) {
+  return /^[0-9\s()+-]+$/.test(value.trim());
+}
+
+function showFormSuccess(messageElement, message) {
+  if (!messageElement) return;
+  messageElement.textContent = message;
+  messageElement.style.display = "block";
+}
+
+function completePrayerSubmission() {
+  if (!prayerSubmitting) return;
+  prayerSubmitting = false;
+  prayerForm?.reset();
+  showFormSuccess(prayerSuccess, "Seu pedido foi recebido. Nossa equipe de intercessão estará orando por você.");
+}
 
 if (prayerForm) {
   prayerForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+    if (prayerSuccess) prayerSuccess.style.display = "none";
 
-    const whatsappNumber = "5544998338663";
-    const nameInput = document.querySelector("#nome");
-    const emailInput = document.querySelector("#email");
-    const prayerInput = document.querySelector("#pedido");
-    const nameError = document.querySelector("#erro-nome");
-    const prayerError = document.querySelector("#erro-pedido");
+    const whatsapp = document.querySelector("#oracao-whatsapp")?.value.trim() || "";
+    const contactChecked = Boolean(document.querySelector('input[name="entry.270962273"]:checked'));
 
-    const name = nameInput?.value.trim() || "";
-    const email = emailInput?.value.trim() || "";
-    const prayer = prayerInput?.value.trim() || "";
+    const validations = [
+      ["#erro-whatsapp", whatsapp && isValidWhatsapp(whatsapp)],
+      ["#erro-nome", hasValue("#oracao-nome")],
+      ["#erro-pedido", hasValue("#pedido")],
+      ["#erro-area", hasValue("#pedido-area")],
+      ["#erro-idade", hasValue("#oracao-idade")],
+      ["#erro-cristao", hasValue("#oracao-cristao")],
+      ["#erro-bairro", hasValue("#oracao-bairro")],
+      ["#erro-contato", contactChecked],
+      ["#erro-celula", hasValue("#oracao-celula")]
+    ];
 
-    if (nameError) nameError.style.display = name ? "none" : "block";
-    if (prayerError) prayerError.style.display = prayer ? "none" : "block";
+    validations.forEach(([errorId, valid]) => showFieldError(errorId, !valid));
 
-    if (!name || !prayer) return;
+    if (validations.some(([, valid]) => !valid)) {
+      event.preventDefault();
+      return;
+    }
 
-    let message = `Pedido de oração\n\nNome: ${name}`;
-    if (email) message += `\nE-mail: ${email}`;
-    message += `\n\n${prayer}`;
-
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
+    prayerSubmitting = true;
+    window.setTimeout(completePrayerSubmission, 2500);
   });
+}
+
+if (prayerIframe) {
+  prayerIframe.addEventListener("load", completePrayerSubmission);
+}
+
+/* =========================================================
+   FORMULÁRIO DE CÉLULAS
+========================================================= */
+const cellsOpenModal = document.querySelector("#cells-open-modal");
+const cellsModal = document.querySelector("#cells-modal");
+const cellsModalClose = document.querySelector("#cells-modal-close");
+const cellsForm = document.querySelector("#cells-form");
+const cellsIframe = document.querySelector("#hidden_iframe_cells");
+const cellsSuccess = document.querySelector("#cells-success");
+let cellsSubmitting = false;
+
+function completeCellsSubmission() {
+  if (!cellsSubmitting) return;
+  cellsSubmitting = false;
+  cellsForm?.reset();
+  showFormSuccess(cellsSuccess, "Recebemos seus dados! Em breve entraremos em contato para ajudar você a encontrar uma célula.");
+}
+
+function openCellsModal() {
+  if (!cellsModal) return;
+  cellsModal.classList.add("open");
+  cellsModal.setAttribute("aria-hidden", "false");
+  lockScroll(true);
+  setTimeout(() => document.querySelector("#cells-name-phone")?.focus(), 80);
+}
+
+function closeCellsModal() {
+  if (!cellsModal) return;
+  cellsModal.classList.remove("open");
+  cellsModal.setAttribute("aria-hidden", "true");
+  lockScroll(false);
+}
+
+if (cellsOpenModal) cellsOpenModal.addEventListener("click", openCellsModal);
+if (cellsModalClose) cellsModalClose.addEventListener("click", closeCellsModal);
+if (cellsModal) {
+  cellsModal.addEventListener("click", (event) => {
+    if (event.target === cellsModal) closeCellsModal();
+  });
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && cellsModal?.classList.contains("open")) {
+    closeCellsModal();
+  }
+});
+
+if (cellsForm) {
+  cellsForm.addEventListener("submit", (event) => {
+    if (cellsSuccess) cellsSuccess.style.display = "none";
+
+    const validations = [
+      ["#cells-error-name-phone", hasValue("#cells-name-phone")],
+      ["#cells-error-address", hasValue("#cells-address")]
+    ];
+
+    validations.forEach(([errorId, valid]) => showFieldError(errorId, !valid));
+
+    if (validations.some(([, valid]) => !valid)) {
+      event.preventDefault();
+      return;
+    }
+
+    cellsSubmitting = true;
+    window.setTimeout(completeCellsSubmission, 2500);
+  });
+}
+
+if (cellsIframe) {
+  cellsIframe.addEventListener("load", completeCellsSubmission);
 }
 
 /* =========================================================

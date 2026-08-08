@@ -520,14 +520,15 @@ header{
 /* ============ HERO MINISTÉRIOS ============ */
 .ministries-hero{
   position:relative;
-  min-height:80vh;
+  min-height:68vh;
   display:grid;
   place-items:center;
   overflow:hidden;
-  padding:140px 32px 110px;
+  padding:95px 32px;
   color:var(--white);
   background:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    radial-gradient(ellipse at center, rgba(0,0,0,0.2), transparent 68%),
+    linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.52)),
     url("assets/adoracao-01.jpg") center 0 / cover no-repeat;
 }
 .ministries-hero::after{
@@ -594,6 +595,7 @@ header{
 }
 
 /* ============ MINISTÉRIOS ============ */
+#ministerios-lista{scroll-margin-top:96px;}
 .min-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
   background:var(--line);border:1px solid var(--line);
@@ -887,7 +889,7 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .watch-thumb{max-width:260px;}
   .culto-grid{grid-template-columns:repeat(3, 1fr);}
   .culto-modal-thumbs{grid-template-columns:repeat(4, 1fr);}
-  .ministries-hero{min-height:76vh;padding:120px 24px 90px;}
+  .ministries-hero{min-height:68vh;padding:86px 24px;}
   .min-grid{grid-template-columns:1fr;}
   .prayer-section{grid-template-columns:1fr;}
   .prayer-text{padding:90px 32px 60px;border-right:none;border-bottom:1px solid var(--line-dark);}
@@ -919,7 +921,7 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .culto-viewer-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:42px;height:42px;font-size:24px;}
   .culto-viewer-prev{left:8px;}
   .culto-viewer-next{right:8px;}
-  .ministries-hero{min-height:78vh;padding:110px 20px 78px;}
+  .ministries-hero{min-height:72vh;padding:80px 20px;}
   .ministries-hero__actions .btn{width:100%;justify-content:center;}
   .footer-top{grid-template-columns:1fr;}
   .footer-bottom{flex-direction:column;gap:16px;align-items:flex-start;}

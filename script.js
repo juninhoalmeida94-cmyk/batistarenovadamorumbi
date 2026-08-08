@@ -99,6 +99,8 @@ const cellsForm = document.querySelector("#cells-form");
 const cellsIframe = document.querySelector("#hidden_iframe_cells");
 const cellsSuccess = document.querySelector("#cells-success");
 let cellsSubmitting = false;
+let cellsPreviousFocus = null;
+let cellsPreviousBodyOverflow = "";
 
 function completeCellsSubmission() {
   if (!cellsSubmitting) return;
@@ -109,9 +111,11 @@ function completeCellsSubmission() {
 
 function openCellsModal() {
   if (!cellsModal) return;
+  cellsPreviousFocus = document.activeElement;
+  cellsPreviousBodyOverflow = document.body.style.overflow;
   cellsModal.classList.add("open");
   cellsModal.setAttribute("aria-hidden", "false");
-  lockScroll(true);
+  document.body.style.overflow = "hidden";
   setTimeout(() => document.querySelector("#cells-name-phone")?.focus(), 80);
 }
 
@@ -119,7 +123,8 @@ function closeCellsModal() {
   if (!cellsModal) return;
   cellsModal.classList.remove("open");
   cellsModal.setAttribute("aria-hidden", "true");
-  lockScroll(false);
+  document.body.style.overflow = cellsPreviousBodyOverflow;
+  if (cellsPreviousFocus instanceof HTMLElement) cellsPreviousFocus.focus();
 }
 
 if (cellsOpenModal) cellsOpenModal.addEventListener("click", openCellsModal);
@@ -131,8 +136,25 @@ if (cellsModal) {
 }
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && cellsModal?.classList.contains("open")) {
+  if (!cellsModal?.classList.contains("open")) return;
+
+  if (event.key === "Escape") {
     closeCellsModal();
+    return;
+  }
+
+  if (event.key === "Tab") {
+    const focusable = [...cellsModal.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href]')];
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   }
 });
 

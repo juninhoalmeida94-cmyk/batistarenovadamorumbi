@@ -62,21 +62,26 @@ if (prayerForm) {
     const contactChecked = Boolean(document.querySelector('input[name="entry.270962273"]:checked'));
 
     const validations = [
-      ["#erro-whatsapp", whatsapp && isValidWhatsapp(whatsapp)],
-      ["#erro-nome", hasValue("#oracao-nome")],
-      ["#erro-pedido", hasValue("#pedido")],
-      ["#erro-area", hasValue("#pedido-area")],
-      ["#erro-idade", hasValue("#oracao-idade")],
-      ["#erro-cristao", hasValue("#oracao-cristao")],
-      ["#erro-bairro", hasValue("#oracao-bairro")],
-      ["#erro-contato", contactChecked],
-      ["#erro-celula", hasValue("#oracao-celula")]
+      ["#erro-whatsapp", "#oracao-whatsapp", whatsapp && isValidWhatsapp(whatsapp)],
+      ["#erro-nome", "#oracao-nome", hasValue("#oracao-nome")],
+      ["#erro-pedido", "#pedido", hasValue("#pedido")],
+      ["#erro-area", "#pedido-area", hasValue("#pedido-area")],
+      ["#erro-idade", "#oracao-idade", hasValue("#oracao-idade")],
+      ["#erro-bairro", "#oracao-bairro", hasValue("#oracao-bairro")],
+      ["#erro-contato", 'input[name="entry.270962273"]', contactChecked]
     ];
 
-    validations.forEach(([errorId, valid]) => showFieldError(errorId, !valid));
+    validations.forEach(([errorId, fieldSelector, valid]) => {
+      showFieldError(errorId, !valid);
+      document.querySelectorAll(fieldSelector).forEach((field) => {
+        field.setAttribute("aria-invalid", String(!valid));
+      });
+    });
 
-    if (validations.some(([, valid]) => !valid)) {
+    const firstInvalid = validations.find(([, , valid]) => !valid);
+    if (firstInvalid) {
       event.preventDefault();
+      document.querySelector(firstInvalid[1])?.focus();
       return;
     }
 

@@ -354,24 +354,24 @@
         target="hidden_iframe_prayer"
         novalidate>
         <div class="field">
-          <label for="oracao-whatsapp">WhatsApp</label>
+          <label for="oracao-whatsapp">WhatsApp <span class="required-mark" aria-hidden="true">*</span></label>
           <input type="tel" id="oracao-whatsapp" name="entry.2025967470" placeholder="(44) 99999-9999" required autocomplete="tel">
           <div class="form-error" id="erro-whatsapp">Informe um WhatsApp válido</div>
         </div>
         <div class="field">
-          <label for="oracao-nome">Nome completo</label>
+          <label for="oracao-nome">Nome completo <span class="required-mark" aria-hidden="true">*</span></label>
           <input type="text" id="oracao-nome" name="entry.606251901" placeholder="Seu nome completo" required autocomplete="name">
           <div class="form-error" id="erro-nome">Preencha seu nome completo</div>
         </div>
         <div class="field">
-          <label for="pedido">Qual seu pedido de oração?</label>
+          <label for="pedido">Qual seu pedido de oração? <span class="required-mark" aria-hidden="true">*</span></label>
           <textarea id="pedido" name="entry.765707895" placeholder="Compartilhe o que está em seu coração..." required></textarea>
           <div class="form-error" id="erro-pedido">Escreva seu pedido</div>
         </div>
         <div class="field">
-          <label for="pedido-area">Pedido na área de:</label>
+          <label for="pedido-area">Pedido na área de: <span class="required-mark" aria-hidden="true">*</span></label>
           <select id="pedido-area" name="entry.1092934507" required>
-            <option value="">Selecione uma opção</option>
+            <option value="" disabled selected>Selecione uma opção</option>
             <option value="Saúde Mental">Saúde Mental</option>
             <option value="Cura Física">Cura Física</option>
             <option value="Área Financeira">Área Financeira</option>
@@ -382,30 +382,30 @@
         </div>
         <div class="prayer-form-row">
           <div class="field">
-            <label for="oracao-idade">Qual sua idade?</label>
+            <label for="oracao-idade">Qual sua idade? <span class="required-mark" aria-hidden="true">*</span></label>
             <input type="text" id="oracao-idade" name="entry.761476343" placeholder="Sua idade" required inputmode="numeric">
             <div class="form-error" id="erro-idade">Informe sua idade</div>
           </div>
           <div class="field">
-            <label for="oracao-bairro">Bairro e cidade que mora?</label>
+            <label for="oracao-bairro">Bairro e cidade que mora? <span class="required-mark" aria-hidden="true">*</span></label>
             <input type="text" id="oracao-bairro" name="entry.2107193648" placeholder="Bairro e cidade" required autocomplete="address-level2">
             <div class="form-error" id="erro-bairro">Informe seu bairro e cidade</div>
           </div>
         </div>
         <div class="field">
           <label for="oracao-cristao">Você é cristão? Qual igreja você frequenta?</label>
-          <input type="text" id="oracao-cristao" name="entry.2108663863" placeholder="Conte brevemente" required>
+          <input type="text" id="oracao-cristao" name="entry.2108663863" placeholder="Conte brevemente">
           <div class="form-error" id="erro-cristao">Preencha esta informação</div>
         </div>
         <fieldset class="field choice-field">
-          <legend>Gostaria que alguém da nossa equipe entrasse em contato com você?</legend>
+          <legend>Gostaria que alguém da nossa equipe entrasse em contato com você? <span class="required-mark" aria-hidden="true">*</span></legend>
           <label><input type="radio" name="entry.270962273" value="Sim" required> Sim</label>
           <label><input type="radio" name="entry.270962273" value="Não" required> Não</label>
           <div class="form-error" id="erro-contato">Escolha uma opção</div>
         </fieldset>
         <div class="field">
           <label for="oracao-celula">Você está frequentando alguma CÉLULA da Igreja Batista Renovada?</label>
-          <input type="text" id="oracao-celula" name="entry.651909894" placeholder="Sim, não ou qual célula" required>
+          <input type="text" id="oracao-celula" name="entry.651909894" placeholder="Sim, não ou qual célula">
           <div class="form-error" id="erro-celula">Preencha esta informação</div>
         </div>
         <div class="form-submit">

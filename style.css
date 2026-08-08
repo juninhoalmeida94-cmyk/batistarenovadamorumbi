@@ -236,7 +236,7 @@ header{
 
 /* ============ SOBRE ============ */
 .about-grid{
-  display:grid;grid-template-columns:minmax(0, 660px);justify-content:center;align-items:start;
+  display:grid;grid-template-columns:minmax(0, 1fr);align-items:start;
 }
 .about-text p{color:var(--ink);font-size:17px;line-height:1.75;margin-bottom:20px;}
 .about-text p.lead2{font-family:var(--display);font-size:24px;font-weight:500;line-height:1.4;font-style:italic;margin-bottom:28px;}
@@ -247,20 +247,47 @@ header{
 .verse-block p{font-family:var(--display);font-style:italic;font-size:18px;line-height:1.6;}
 .verse-block cite{font-family:var(--mono);font-size:12px;font-style:normal;text-transform:uppercase;letter-spacing:0.08em;color:var(--grey);display:block;margin-top:10px;}
 
-.schedule-card{
-  background:var(--white);border:1px solid var(--ink);padding:44px;
-}
-.schedule-card h3{font-size:22px;margin-bottom:6px;}
-.schedule-card .eyebrow{margin-bottom:18px;}
-.schedule-list{margin-top:28px;}
+.schedule-program{width:100%;}
+.schedule-program .eyebrow{margin-bottom:18px;}
+.schedule-program > h2{font-size:clamp(36px,5vw,58px);}
+.schedule-list{margin-top:56px;border-top:1px solid var(--ink);}
 .schedule-item{
-  display:grid;grid-template-columns:1fr auto;align-items:baseline;
-  padding:20px 0;border-top:1px solid var(--line);gap:20px;
+  display:grid;
+  grid-template-columns:minmax(0,35fr) minmax(0,65fr);
+  gap:48px;
+  padding:46px 0;
+  border-bottom:1px solid var(--line);
 }
-.schedule-item:first-child{border-top:none;}
-.schedule-item .day{font-family:var(--display);font-size:17px;font-weight:500;}
-.schedule-item .desc{font-size:13px;color:var(--grey);margin-top:3px;}
-.schedule-item .time{font-family:var(--mono);font-size:15px;font-weight:600;white-space:nowrap;}
+.schedule-day{
+  font-family:var(--display);
+  font-size:clamp(22px,2.5vw,30px);
+  font-weight:500;
+  line-height:1.15;
+  text-transform:uppercase;
+}
+.schedule-time{
+  margin-bottom:8px;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.1em;
+}
+.schedule-details h3{font-size:clamp(27px,3vw,38px);font-weight:500;}
+.schedule-description{margin-top:10px;color:var(--grey);font-size:15px;}
+.schedule-notes{margin-top:24px;color:var(--grey);font-size:14px;line-height:1.8;}
+.schedule-tag,
+.schedule-link{
+  display:inline-block;
+  margin-top:28px;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.schedule-tag{color:var(--grey);}
+.schedule-link{margin-left:24px;border-bottom:1px solid var(--ink);padding-bottom:3px;}
+.schedule-link:hover{border-bottom-color:transparent;}
 /* ============ CÉLULAS ============ */
 .cells-section{background-color:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
 .cells-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:80px;align-items:center;}
@@ -929,6 +956,13 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
 @media (max-width:600px){
   .wrap{padding:0 20px;}
   .section{padding:80px 0;}
+  .schedule-list{margin-top:40px;}
+  .schedule-item{grid-template-columns:1fr;gap:18px;padding:34px 0;}
+  .schedule-day{font-size:23px;}
+  .schedule-details h3{font-size:29px;}
+  .schedule-notes{margin-top:20px;}
+  .schedule-tag,.schedule-link{margin-top:24px;}
+  .schedule-link{margin-left:18px;}
   .hero{padding:110px 20px 64px;}
   .hero{background-position:center center;}
   .hero h1{margin-bottom:24px;font-size:clamp(38px,11.5vw,48px);}

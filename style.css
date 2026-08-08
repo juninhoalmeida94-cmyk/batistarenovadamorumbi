@@ -633,6 +633,9 @@ header{
 
 /* ============ ORAÇÃO ============ */
 #formulario-celulas{scroll-margin-top:96px;}
+#formulario-celulas .prayer-section{min-height:0;}
+#formulario-celulas .prayer-text,
+#formulario-celulas .prayer-form{padding-top:100px;padding-bottom:100px;}
 .prayer-section{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -889,6 +892,8 @@ footer{background:var(--black);color:var(--white);padding:90px 0 36px;}
   .prayer-section{grid-template-columns:1fr;}
   .prayer-text{padding:90px 32px 60px;border-right:none;border-bottom:1px solid var(--line-dark);}
   .prayer-form{padding:60px 32px 90px;}
+  #formulario-celulas .prayer-text,
+  #formulario-celulas .prayer-form{padding-top:64px;padding-bottom:64px;}
   .contact-grid{grid-template-columns:1fr;gap:56px;}
   .footer-top{grid-template-columns:1fr 1fr;gap:40px;}
   .event-row{grid-template-columns:80px 1fr;}

@@ -1,1 +1,9 @@
-*.zip
+﻿*.zip
+*.backup-*
+ATUALIZAR-*
+CORRIGIR-*
+instalar-v*.ps1
+README-PIBR-PAINEL-V*.md
+README-PIBR-V*.md
+README-V*.txt
+.vscode/

@@ -1067,6 +1067,8 @@ footer{background:var(--black);color:var(--white);padding:72px 0 30px;}
   .schedule-link{margin-left:0;display:block;width:fit-content;}
   .hero{padding:110px 20px 64px;}
   .hero{background-position:center center;}
+  .hero::before{background:linear-gradient(to bottom,rgba(0,0,0,.32) 0%,rgba(0,0,0,.48) 45%,rgba(0,0,0,.78) 100%);}
+  .hero .wrap{transform:translateY(clamp(56px,12vh,96px));}
   .hero h1{margin-bottom:24px;font-size:clamp(38px,11.5vw,48px);}
   .hero-title-line{display:block;white-space:nowrap;}
   .hero-video-controls{right:16px;bottom:16px;}
@@ -1098,4 +1100,12 @@ footer{background:var(--black);color:var(--white);padding:72px 0 30px;}
   .footer-col h4{margin-bottom:14px;}
   .footer-col a,.footer-col p{margin-bottom:8px;}
   .footer-bottom{flex-direction:column;gap:16px;align-items:flex-start;padding-top:20px;}
+}
+
+@media (max-width:360px){
+  html,body{max-width:100%;overflow-x:clip;}
+  .hero-title-line{white-space:normal;}
+  .schedule-item{grid-template-columns:1fr;}
+  .contact-grid>*{min-width:0;}
+  .contact-info .item a{overflow-wrap:anywhere;word-break:break-word;}
 }

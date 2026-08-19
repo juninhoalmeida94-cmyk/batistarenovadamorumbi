@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>Membros — PIBR Morumbi</title>
+  <meta name="description" content="Gestão administrativa de membros da PIBR Morumbi." />
+  <link rel="icon" type="image/jpeg" href="../assets/favicon.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=3.3.1" />
+  <link rel="stylesheet" href="membros.css?v=3.4.1" />
+</head>
+<body>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <div id="members-loading" class="members-gate">
+    <div class="gate-card">
+      <div class="gate-icon"><span data-lucide="database"></span></div>
+      <h1>Carregando membros</h1>
+      <p>Validando seu acesso administrativo...</p>
+    </div>
+  </div>
+
+  <div id="members-denied" class="members-gate hidden">
+    <div class="gate-card">
+      <div class="gate-icon danger"><span data-lucide="shield-alert"></span></div>
+      <h1>Acesso restrito</h1>
+      <p>O módulo de membros contém dados administrativos e está disponível somente para Administradores.</p>
+      <a class="btn btn-primary" href="index.html"><span data-lucide="arrow-left"></span> Voltar ao painel</a>
+    </div>
+  </div>
+
+  <div id="members-app" class="app-shell hidden">
+    <aside id="members-sidebar" class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">P</div>
+        <div><strong>PIBR Morumbi</strong><small>Administração</small></div>
+        <button id="members-sidebar-close" class="icon-btn mobile-only" aria-label="Fechar menu"><span data-lucide="x"></span></button>
+      </div>
+
+      <nav class="nav-menu">
+        <a class="nav-item nav-link" href="index.html#dashboard"><span data-lucide="layout-dashboard"></span>Dashboard</a>
+        <div class="nav-label">Gestão</div>
+        <a class="nav-item nav-link active" href="membros.html"><span data-lucide="users"></span>Membros</a>
+        <a class="nav-item nav-link" href="agenda.html"><span data-lucide="calendar-range"></span>Agenda Central</a>
+        <a class="nav-item nav-link" href="celulas-admin.html"><span data-lucide="house-heart"></span>Células</a>
+        <a class="nav-item nav-link" href="ministerios-admin.html"><span data-lucide="badge-plus"></span>Ministérios</a>
+        <a class="nav-item nav-link" href="index.html#leaders"><span data-lucide="contact-round"></span>Líderes</a>
+        <div class="nav-label">Acompanhamento</div>
+        <a class="nav-item nav-link" href="acompanhamento.html"><span data-lucide="route"></span>Acompanhamento</a>
+        <a class="nav-item nav-link" href="index.html#visitors"><span data-lucide="user-round-plus"></span>Visitantes</a>
+        <a class="nav-item nav-link" href="index.html#prayers"><span data-lucide="hand-heart"></span>Pedidos de oração</a>
+        <a class="nav-item nav-link" href="index.html#cell_interests"><span data-lucide="users-round"></span>Interessados em célula</a>
+        <div class="nav-label">Mídia</div>
+        <a class="nav-item nav-link" href="index.html#media"><span data-lucide="images"></span>Mídia / Galeria</a>
+        <div class="nav-label">Administração</div>
+        <a class="nav-item nav-link" href="permissoes.html" data-permissions-link><span data-lucide="shield-check"></span>Usuários e permissões</a>
+        <a class="nav-item nav-link" href="index.html#settings"><span data-lucide="settings"></span>Sistema</a>
+        <div data-maintenance-shortcuts>
+          <div class="nav-label">Manutenção</div>
+          <a class="nav-item nav-link" href="index.html#program"><span data-lucide="calendar-clock"></span>Programação pública</a>
+          <a class="nav-item nav-link" href="index.html#content"><span data-lucide="panels-top-left"></span>Conteúdo do site</a>
+          <a class="nav-item nav-link" href="index.html#site_settings"><span data-lucide="settings-2"></span>Configurações do site</a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="../index.html" class="nav-item nav-link"><span data-lucide="external-link"></span>Ver site público</a>
+        <button id="members-logout" class="nav-item danger"><span data-lucide="log-out"></span>Sair</button>
+      </div>
+    </aside>
+
+    <div id="members-sidebar-overlay" class="sidebar-overlay hidden"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="members-sidebar-open" class="icon-btn mobile-only" aria-label="Abrir menu"><span data-lucide="menu"></span></button>
+          <div>
+            <h1>Membros</h1>
+            <p>Cadastro e acompanhamento administrativo de pessoas</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <div class="mode-chip"><span data-lucide="shield-check"></span><span>Somente Administrador</span></div>
+          <div class="profile-button static-profile">
+            <div class="avatar" id="members-avatar">AD</div>
+            <div class="profile-copy"><strong id="members-profile-name">Administrador</strong><small>Administrador</small></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="content members-content">
+        <div class="members-title-row">
+          <div>
+            <span class="eyebrow">GESTÃO DE PESSOAS</span>
+            <h2>Base de membros</h2>
+            <p>Dados internos da igreja. Nada desta área é publicado automaticamente no site.</p>
+          </div>
+          <button id="new-member" class="btn btn-primary"><span data-lucide="user-plus"></span> Novo membro</button>
+        </div>
+
+        <div id="member-stats" class="member-stats"></div>
+
+        <div class="members-grid">
+          <section class="members-panel">
+            <div class="member-toolbar">
+              <div class="member-search">
+                <span data-lucide="search"></span>
+                <input id="member-search" type="search" placeholder="Buscar por nome, telefone ou e-mail..." />
+              </div>
+              <select id="member-category-filter" aria-label="Filtrar por categoria">
+                <option value="">Todas as categorias</option>
+                <option value="member">Membros</option>
+                <option value="leader">Líderes</option>
+                <option value="congregant">Congregados</option>
+                <option value="visitor">Visitantes</option>
+                <option value="new_convert">Novos convertidos</option>
+                <option value="child">Crianças</option>
+                <option value="non_communicant">Membros não comungantes</option>
+              </select>
+              <select id="member-status-filter" aria-label="Filtrar por status">
+                <option value="">Todos os status</option>
+                <option value="active">Ativos</option>
+                <option value="inactive">Inativos</option>
+                <option value="transferred">Transferidos</option>
+                <option value="deceased">Falecidos</option>
+              </select>
+            </div>
+
+            <div id="member-list" class="member-list"></div>
+          </section>
+
+          <aside class="birthdays-panel">
+            <div class="birthdays-head">
+              <div>
+                <span data-lucide="cake"></span>
+                <strong>Aniversariantes</strong>
+              </div>
+              <span id="birthday-month"></span>
+            </div>
+            <div id="birthday-list" class="birthday-list"></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="member-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="member-modal-title">
+    <div class="modal-backdrop" data-close-member-modal></div>
+    <div class="modal-card member-modal-card">
+      <div class="modal-head">
+        <div><span class="eyebrow">MEMBROS</span><h2 id="member-modal-title">Novo membro</h2></div>
+        <button class="icon-btn" data-close-member-modal aria-label="Fechar"><span data-lucide="x"></span></button>
+      </div>
+
+      <form id="member-form" class="member-form">
+        <input type="hidden" id="member-id" />
+
+        <div class="form-section">
+          <div class="form-section-title"><span data-lucide="user-round"></span><div><strong>Informações pessoais</strong><small>Identificação e contato principal</small></div></div>
+          <div class="member-form-grid">
+            <label class="full"><span>URL da foto</span><input id="photo_url" type="url" placeholder="https://..." /></label>
+            <label class="full"><span>Nome completo *</span><input id="full_name" type="text" required /></label>
+            <label><span>E-mail</span><input id="email" type="email" /></label>
+            <label><span>Telefone / WhatsApp</span><input id="phone" type="tel" placeholder="(44) 99999-9999" /></label>
+            <label><span>Data de nascimento</span><input id="birth_date" type="date" /></label>
+            <label><span>Categoria</span>
+              <select id="category">
+                <option value="member">Membro</option>
+                <option value="leader">Líder</option>
+                <option value="congregant">Congregado</option>
+                <option value="visitor">Visitante</option>
+                <option value="new_convert">Novo convertido</option>
+                <option value="child">Criança</option>
+                <option value="non_communicant">Membro não comungante</option>
+              </select>
+            </label>
+            <label><span>Data de entrada na igreja</span><input id="joined_at" type="date" /></label>
+            <label><span>Estado civil</span>
+              <select id="civil_status">
+                <option value="not_informed">Não informado</option>
+                <option value="single">Solteiro(a)</option>
+                <option value="married">Casado(a)</option>
+                <option value="stable_union">União estável</option>
+                <option value="divorced">Divorciado(a)</option>
+                <option value="widowed">Viúvo(a)</option>
+              </select>
+            </label>
+            <label class="full"><span>Cargo / função</span><input id="role_title" type="text" placeholder="Ex.: Líder de célula, Diácono, Membro..." /></label>
+            <label class="check-line full"><input id="is_minor" type="checkbox" /><span>Menor de idade</span></label>
+          </div>
+
+          <div id="guardian-fields" class="guardian-box hidden">
+            <div class="guardian-title"><span data-lucide="users-round"></span><strong>Dados do responsável</strong></div>
+            <div class="member-form-grid">
+              <label class="full"><span>Vincular a membro da igreja (opcional)</span><select id="guardian_member_id"><option value="">Selecione...</option></select></label>
+              <label><span>Nome do responsável</span><input id="guardian_name" type="text" /></label>
+              <label><span>Telefone do responsável</span><input id="guardian_phone" type="tel" /></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title"><span data-lucide="map-pin"></span><div><strong>Endereço</strong><small>Localização para acompanhamento e células</small></div></div>
+          <div class="member-form-grid">
+            <label><span>CEP</span><input id="postal_code" type="text" placeholder="00000-000" /></label>
+            <label><span>Bairro</span><input id="neighborhood" type="text" /></label>
+            <label class="full"><span>Rua / Avenida</span><input id="street" type="text" /></label>
+            <label><span>Número</span><input id="address_number" type="text" /></label>
+            <label><span>Complemento</span><input id="complement" type="text" /></label>
+            <label><span>Cidade</span><input id="city" type="text" value="Paranavaí" /></label>
+            <label><span>UF</span><input id="state" type="text" value="PR" maxlength="2" /></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title"><span data-lucide="clipboard-list"></span><div><strong>Dados administrativos</strong><small>Informações internas e acompanhamento espiritual</small></div></div>
+          <div class="member-form-grid">
+            <label><span>CPF</span><input id="cpf" type="text" /></label>
+            <label><span>RG</span><input id="rg" type="text" /></label>
+            <label><span>Sexo</span>
+              <select id="gender">
+                <option value="">Não informado</option>
+                <option value="male">Masculino</option>
+                <option value="female">Feminino</option>
+                <option value="not_informed">Prefere não informar</option>
+              </select>
+            </label>
+            <label><span>Status do membro</span>
+              <select id="membership_status">
+                <option value="active">Ativo</option>
+                <option value="inactive">Inativo</option>
+                <option value="transferred">Transferido</option>
+                <option value="deceased">Falecido</option>
+              </select>
+            </label>
+            <label><span>Decisão de fé</span><input id="decision_date" type="date" /></label>
+            <label><span>Batismo nas águas</span><input id="baptism_date" type="date" /></label>
+            <label><span>Data de entrada como membro</span><input id="membership_date" type="date" /></label>
+            <label><span>Líder responsável</span><select id="assigned_leader_id"><option value="">Nenhum</option></select></label>
+            <label class="full"><span>Observações internas</span><textarea id="notes" rows="4" placeholder="Acompanhamento, informações importantes, histórico..."></textarea></label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title"><span data-lucide="heart-handshake"></span><div><strong>Ministérios de interesse</strong><small>Marque áreas em que a pessoa deseja servir ou conhecer</small></div></div>
+          <div id="ministry-options" class="ministry-options"></div>
+        </div>
+
+        <div class="member-form-actions">
+          <button type="button" class="btn btn-secondary" data-close-member-modal>Cancelar</button>
+          <button id="save-member" type="submit" class="btn btn-primary"><span data-lucide="save"></span> Salvar membro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="config.js?v=3.3.1"></script>
+  <script src="membros.js?v=3.4.1"></script>
+  <script src="permissions-ui.js?v=3.4.1"></script>
+</body>
+</html>

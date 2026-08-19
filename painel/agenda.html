@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>Agenda Central — PIBR Morumbi</title>
+  <meta name="description" content="Agenda administrativa da PIBR Morumbi." />
+  <link rel="icon" type="image/jpeg" href="../assets/favicon.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=3.3.1" />
+  <link rel="stylesheet" href="agenda.css?v=3.4.1" />
+</head>
+<body>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <div id="agenda-loading" class="agenda-gate">
+    <div class="agenda-gate-card">
+      <div class="agenda-gate-icon"><span data-lucide="calendar-clock"></span></div>
+      <h1>Carregando Agenda Central</h1>
+      <p>Validando seu acesso administrativo...</p>
+    </div>
+  </div>
+
+  <div id="agenda-denied" class="agenda-gate hidden">
+    <div class="agenda-gate-card">
+      <div class="agenda-gate-icon danger"><span data-lucide="shield-alert"></span></div>
+      <h1>Acesso restrito</h1>
+      <p>A Agenda Central está disponível somente para Administradores.</p>
+      <a class="btn btn-primary" href="index.html"><span data-lucide="arrow-left"></span> Voltar ao painel</a>
+    </div>
+  </div>
+
+  <div id="agenda-app" class="app-shell hidden">
+    <aside id="agenda-sidebar" class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">P</div>
+        <div><strong>PIBR Morumbi</strong><small>Administração</small></div>
+        <button id="agenda-sidebar-close" class="icon-btn mobile-only" aria-label="Fechar menu"><span data-lucide="x"></span></button>
+      </div>
+
+      <nav class="nav-menu">
+        <a class="nav-item nav-link" href="index.html#dashboard"><span data-lucide="layout-dashboard"></span>Dashboard</a>
+        <div class="nav-label">Gestão</div>
+        <a class="nav-item nav-link" href="membros.html"><span data-lucide="users"></span>Membros</a>
+        <a class="nav-item nav-link active" href="agenda.html"><span data-lucide="calendar-range"></span>Agenda Central</a>
+        <a class="nav-item nav-link" href="celulas-admin.html"><span data-lucide="house-heart"></span>Células</a>
+        <a class="nav-item nav-link" href="ministerios-admin.html"><span data-lucide="badge-plus"></span>Ministérios</a>
+        <a class="nav-item nav-link" href="index.html#leaders"><span data-lucide="contact-round"></span>Líderes</a>
+        <div class="nav-label">Acompanhamento</div>
+        <a class="nav-item nav-link" href="acompanhamento.html"><span data-lucide="route"></span>Acompanhamento</a>
+        <a class="nav-item nav-link" href="index.html#visitors"><span data-lucide="user-round-plus"></span>Visitantes</a>
+        <a class="nav-item nav-link" href="index.html#prayers"><span data-lucide="hand-heart"></span>Pedidos de oração</a>
+        <a class="nav-item nav-link" href="index.html#cell_interests"><span data-lucide="users-round"></span>Interessados em célula</a>
+        <div class="nav-label">Mídia</div>
+        <a class="nav-item nav-link" href="index.html#media"><span data-lucide="images"></span>Mídia / Galeria</a>
+        <div class="nav-label">Administração</div>
+        <a class="nav-item nav-link" href="permissoes.html" data-permissions-link><span data-lucide="shield-check"></span>Usuários e permissões</a>
+        <a class="nav-item nav-link" href="index.html#settings"><span data-lucide="settings"></span>Sistema</a>
+        <div data-maintenance-shortcuts>
+          <div class="nav-label">Manutenção</div>
+          <a class="nav-item nav-link" href="index.html#program"><span data-lucide="calendar-clock"></span>Programação pública</a>
+          <a class="nav-item nav-link" href="index.html#content"><span data-lucide="panels-top-left"></span>Conteúdo do site</a>
+          <a class="nav-item nav-link" href="index.html#site_settings"><span data-lucide="settings-2"></span>Configurações do site</a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="../index.html" class="nav-item nav-link"><span data-lucide="external-link"></span>Ver site público</a>
+        <button id="agenda-logout" class="nav-item danger"><span data-lucide="log-out"></span>Sair</button>
+      </div>
+    </aside>
+
+    <div id="agenda-sidebar-overlay" class="sidebar-overlay hidden"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="agenda-sidebar-open" class="icon-btn mobile-only" aria-label="Abrir menu"><span data-lucide="menu"></span></button>
+          <div>
+            <h1>Agenda Central</h1>
+            <p>Cultos, eventos, células e escalas em um só lugar</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <div class="mode-chip"><span data-lucide="shield-check"></span><span>Administrativo</span></div>
+          <div class="profile-button static-profile">
+            <div class="avatar" id="agenda-avatar">AD</div>
+            <div class="profile-copy"><strong id="agenda-profile-name">Administrador</strong><small>Administrador</small></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="content agenda-content">
+        <div class="agenda-intro">
+          <div>
+            <span class="eyebrow">ORGANIZAÇÃO INTERNA</span>
+            <h2>Agenda Central</h2>
+            <p>O calendário é administrativo. Cultos, escalas e eventos ficam internos; qualquer publicação no site é controlada pela Manutenção.</p>
+          </div>
+        </div>
+
+        <div class="agenda-tabs" role="tablist">
+          <button class="agenda-tab active" data-agenda-tab="calendar"><span data-lucide="calendar-days"></span><strong>Calendário</strong><small>Visão mensal</small></button>
+          <button class="agenda-tab" data-agenda-tab="services"><span data-lucide="church"></span><strong>Cultos fixos</strong><small>Recorrências semanais</small></button>
+          <button class="agenda-tab" data-agenda-tab="events"><span data-lucide="sparkles"></span><strong>Eventos especiais</strong><small>Datas específicas</small></button>
+          <button class="agenda-tab" data-agenda-tab="scales"><span data-lucide="users-round"></span><strong>Escalas</strong><small>Equipes e ministérios</small></button>
+        </div>
+
+        <section id="agenda-calendar" class="agenda-section active">
+          <div class="agenda-section-head">
+            <div>
+              <h3 id="calendar-title">Calendário</h3>
+              <p>Verde: cultos fixos · Roxo: células · Azul: escalas · Preto: eventos especiais</p>
+            </div>
+            <div class="calendar-actions">
+              <button id="calendar-today" class="btn btn-secondary"><span data-lucide="calendar-check"></span> Hoje</button>
+              <button id="calendar-prev" class="icon-btn" aria-label="Mês anterior"><span data-lucide="chevron-left"></span></button>
+              <button id="calendar-next" class="icon-btn" aria-label="Próximo mês"><span data-lucide="chevron-right"></span></button>
+            </div>
+          </div>
+          <div class="calendar-weekdays">
+            <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+          </div>
+          <div id="calendar-grid" class="calendar-grid"></div>
+          <div class="calendar-legend">
+            <span><i class="legend-dot service"></i>Culto fixo</span>
+            <span><i class="legend-dot cell"></i>Célula</span>
+            <span><i class="legend-dot scale"></i>Escala</span>
+            <span><i class="legend-dot event"></i>Evento especial</span>
+          </div>
+        </section>
+
+        <section id="agenda-services" class="agenda-section">
+          <div class="agenda-section-head">
+            <div><h3>Cultos fixos</h3><p>Cadastre cultos recorrentes e personalize o nome de semanas específicas do mês.</p></div>
+            <button id="new-service" class="btn btn-primary"><span data-lucide="plus"></span> Adicionar culto</button>
+          </div>
+          <div id="services-list" class="agenda-card-grid"></div>
+        </section>
+
+        <section id="agenda-events" class="agenda-section">
+          <div class="agenda-section-head">
+            <div><h3>Eventos especiais</h3><p>Conferências, retiros, encontros e demais datas específicas.</p></div>
+            <button id="new-special-event" class="btn btn-primary"><span data-lucide="plus"></span> Adicionar evento</button>
+          </div>
+          <div id="special-events-list" class="agenda-list"></div>
+        </section>
+
+        <section id="agenda-scales" class="agenda-section">
+          <div class="agenda-section-head">
+            <div><h3>Escalas</h3><p>Monte equipes por ministério, culto ou evento e registre a função de cada pessoa.</p></div>
+            <button id="new-scale" class="btn btn-primary"><span data-lucide="plus"></span> Nova escala</button>
+          </div>
+          <div id="scales-list" class="agenda-list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="agenda-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="agenda-modal-title">
+    <div class="modal-backdrop" data-close-agenda-modal></div>
+    <div class="modal-card agenda-modal-card">
+      <div class="modal-head">
+        <div><span class="eyebrow" id="agenda-modal-eyebrow">AGENDA</span><h2 id="agenda-modal-title">Novo registro</h2></div>
+        <button class="icon-btn" data-close-agenda-modal aria-label="Fechar"><span data-lucide="x"></span></button>
+      </div>
+      <div id="agenda-modal-body"></div>
+    </div>
+  </div>
+
+  <div id="calendar-detail-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close-calendar-detail></div>
+    <div class="modal-card calendar-detail-card">
+      <div class="modal-head">
+        <div><span class="eyebrow">AGENDA</span><h2 id="calendar-detail-title">Detalhes</h2></div>
+        <button class="icon-btn" data-close-calendar-detail aria-label="Fechar"><span data-lucide="x"></span></button>
+      </div>
+      <div id="calendar-detail-body" class="calendar-detail-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="config.js?v=3.3.1"></script>
+  <script src="agenda.js?v=3.4.1"></script>
+  <script src="permissions-ui.js?v=3.4.1"></script>
+</body>
+</html>

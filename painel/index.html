@@ -20,7 +20,6 @@
       <div class="login-brand">
         <img src="../assets/logo-batista-renovada-morumbi.png" alt="Batista Renovada Morumbi" class="login-logo" onerror="this.style.display='none'" />
         <span class="badge">Sistema Batista Renovada Morumbi</span>
-
       </div>
 
       <div class="login-card">
@@ -68,22 +67,25 @@
       <nav id="nav-menu" class="nav-menu">
         <button class="nav-item active" data-view="dashboard"><span data-lucide="layout-dashboard"></span>Dashboard</button>
         <div class="nav-label">Gestão</div>
-        <button class="nav-item" data-view="events"><span data-lucide="calendar-days"></span>Eventos</button>
-        <button class="nav-item" data-view="cells"><span data-lucide="house-heart"></span>Células</button>
-        <button class="nav-item" data-view="ministries"><span data-lucide="badge-plus"></span>Ministérios</button>
+        <a class="nav-item nav-link" href="membros.html"><span data-lucide="users"></span>Membros</a>
+        <a class="nav-item nav-link" href="agenda.html"><span data-lucide="calendar-range"></span>Agenda Central</a>
+        <a class="nav-item nav-link" href="celulas-admin.html"><span data-lucide="house-heart"></span>Células</a>
+        <a class="nav-item nav-link" href="ministerios-admin.html"><span data-lucide="badge-plus"></span>Ministérios</a>
         <button class="nav-item" data-view="leaders"><span data-lucide="contact-round"></span>Líderes</button>
+        <div class="nav-label">Acompanhamento</div>
+        <a class="nav-item nav-link" href="acompanhamento.html"><span data-lucide="route"></span>Acompanhamento</a>
         <button class="nav-item" data-view="visitors"><span data-lucide="user-round-plus"></span>Visitantes</button>
         <button class="nav-item" data-view="prayers"><span data-lucide="hand-heart"></span>Pedidos de oração</button>
-        <button class="nav-item" data-view="cell_interests"><span data-lucide="users-round"></span>Interessados em Célula</button>
+        <button class="nav-item" data-view="cell_interests"><span data-lucide="users-round"></span>Interessados em célula</button>
         <div class="nav-label">Mídia</div>
         <button class="nav-item" data-view="media"><span data-lucide="images"></span>Mídia / Galeria</button>
-        <div class="nav-label">Site</div>
-        <button class="nav-item" data-view="program"><span data-lucide="calendar-clock"></span>Programação</button>
-        <button class="nav-item" data-view="content"><span data-lucide="panels-top-left"></span>Conteúdo</button>
-        <button class="nav-item" data-view="site_settings"><span data-lucide="settings-2"></span>Configurações do site</button>
-        <div class="nav-label">Sistema</div>
-        <button class="nav-item" data-view="profiles"><span data-lucide="shield-check"></span>Usuários e permissões</button>
+        <div class="nav-label">Administração</div>
+        <a class="nav-item nav-link" href="permissoes.html" data-permissions-link><span data-lucide="shield-check"></span>Usuários e permissões</a>
         <button class="nav-item" data-view="settings"><span data-lucide="settings"></span>Sistema</button>
+        <div class="nav-label" data-maintenance-label>Manutenção</div>
+        <button class="nav-item" data-view="program" data-maintenance-only><span data-lucide="calendar-clock"></span>Programação pública</button>
+        <button class="nav-item" data-view="content" data-maintenance-only><span data-lucide="panels-top-left"></span>Conteúdo do site</button>
+        <button class="nav-item" data-view="site_settings" data-maintenance-only><span data-lucide="settings-2"></span>Configurações do site</button>
       </nav>
 
       <div class="sidebar-footer">
@@ -144,5 +146,6 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="config.js?v=3.3.1"></script>
   <script src="app.js?v=3.3.1"></script>
+  <script src="permissions-ui.js?v=3.4.1"></script>
 </body>
 </html>

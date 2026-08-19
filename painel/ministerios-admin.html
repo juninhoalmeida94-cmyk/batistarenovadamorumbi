@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>Ministérios — PIBR Morumbi</title>
+  <meta name="description" content="Gestão administrativa dos ministérios da PIBR Morumbi." />
+  <link rel="icon" type="image/jpeg" href="../assets/favicon.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=3.3.1" />
+  <link rel="stylesheet" href="ministerios-admin.css?v=3.4.1" />
+</head>
+<body>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <div id="ministries-loading" class="module-gate">
+    <div class="module-gate-card">
+      <div class="module-gate-icon"><span data-lucide="badge-plus"></span></div>
+      <h1>Carregando Ministérios</h1>
+      <p>Validando seu acesso administrativo...</p>
+    </div>
+  </div>
+
+  <div id="ministries-denied" class="module-gate hidden">
+    <div class="module-gate-card">
+      <div class="module-gate-icon danger"><span data-lucide="shield-alert"></span></div>
+      <h1>Acesso restrito</h1>
+      <p>A gestão administrativa de Ministérios está disponível somente para Administradores.</p>
+      <a class="btn btn-primary" href="index.html"><span data-lucide="arrow-left"></span> Voltar ao painel</a>
+    </div>
+  </div>
+
+  <div id="ministries-app" class="app-shell hidden">
+    <aside id="ministries-sidebar" class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">P</div>
+        <div><strong>PIBR Morumbi</strong><small>Administração</small></div>
+        <button id="ministries-sidebar-close" class="icon-btn mobile-only" aria-label="Fechar menu"><span data-lucide="x"></span></button>
+      </div>
+
+      <nav class="nav-menu">
+        <a class="nav-item nav-link" href="index.html#dashboard"><span data-lucide="layout-dashboard"></span>Dashboard</a>
+        <div class="nav-label">Gestão</div>
+        <a class="nav-item nav-link" href="membros.html"><span data-lucide="users"></span>Membros</a>
+        <a class="nav-item nav-link" href="agenda.html"><span data-lucide="calendar-range"></span>Agenda Central</a>
+        <a class="nav-item nav-link" href="celulas-admin.html"><span data-lucide="house-heart"></span>Células</a>
+        <a class="nav-item nav-link active" href="ministerios-admin.html"><span data-lucide="badge-plus"></span>Ministérios</a>
+        <a class="nav-item nav-link" href="index.html#leaders"><span data-lucide="contact-round"></span>Líderes</a>
+        <div class="nav-label">Acompanhamento</div>
+        <a class="nav-item nav-link" href="acompanhamento.html"><span data-lucide="route"></span>Acompanhamento</a>
+        <a class="nav-item nav-link" href="index.html#visitors"><span data-lucide="user-round-plus"></span>Visitantes</a>
+        <a class="nav-item nav-link" href="index.html#prayers"><span data-lucide="hand-heart"></span>Pedidos de oração</a>
+        <a class="nav-item nav-link" href="index.html#cell_interests"><span data-lucide="users-round"></span>Interessados em célula</a>
+        <div class="nav-label">Mídia</div>
+        <a class="nav-item nav-link" href="index.html#media"><span data-lucide="images"></span>Mídia / Galeria</a>
+        <div class="nav-label">Administração</div>
+        <a class="nav-item nav-link" href="permissoes.html" data-permissions-link><span data-lucide="shield-check"></span>Usuários e permissões</a>
+        <a class="nav-item nav-link" href="index.html#settings"><span data-lucide="settings"></span>Sistema</a>
+        <div data-maintenance-shortcuts>
+          <div class="nav-label">Manutenção</div>
+          <a class="nav-item nav-link" href="index.html#program"><span data-lucide="calendar-clock"></span>Programação pública</a>
+          <a class="nav-item nav-link" href="index.html#content"><span data-lucide="panels-top-left"></span>Conteúdo do site</a>
+          <a class="nav-item nav-link" href="index.html#site_settings"><span data-lucide="settings-2"></span>Configurações do site</a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="../index.html" class="nav-item nav-link"><span data-lucide="external-link"></span>Ver site público</a>
+        <button id="ministries-logout" class="nav-item danger"><span data-lucide="log-out"></span>Sair</button>
+      </div>
+    </aside>
+
+    <div id="ministries-sidebar-overlay" class="sidebar-overlay hidden"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="ministries-sidebar-open" class="icon-btn mobile-only" aria-label="Abrir menu"><span data-lucide="menu"></span></button>
+          <div>
+            <h1>Ministérios</h1>
+            <p>Gestão interna de equipes, interessados, grupos e escalas</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <div class="mode-chip"><span data-lucide="lock-keyhole"></span><span>Dados internos</span></div>
+          <div class="profile-button static-profile">
+            <div class="avatar" id="ministries-avatar">AD</div>
+            <div class="profile-copy"><strong id="ministries-profile-name">Administrador</strong><small>Administrador</small></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="content ministries-content">
+        <div class="ministry-page-head">
+          <div>
+            <span class="eyebrow">GESTÃO ADMINISTRATIVA</span>
+            <h2>Ministérios da igreja</h2>
+            <p>Esta área guarda dados reais dos ministérios. Alterações internas não mudam automaticamente as páginas públicas do site.</p>
+          </div>
+          <button id="new-ministry" class="btn btn-primary"><span data-lucide="plus"></span> Novo ministério interno</button>
+        </div>
+
+        <div id="ministries-overall-stats" class="ministries-overall-stats"></div>
+
+        <div class="ministry-layout">
+          <aside class="ministry-selector-panel">
+            <div class="ministry-search">
+              <span data-lucide="search"></span>
+              <input id="ministry-search" type="search" placeholder="Buscar ministério..." />
+            </div>
+            <div id="ministry-list" class="ministry-list"></div>
+          </aside>
+
+          <section id="ministry-detail" class="ministry-detail">
+            <div class="ministry-empty-detail">
+              <span data-lucide="badge-plus"></span>
+              <h3>Selecione um ministério</h3>
+              <p>Escolha um item ao lado para abrir a gestão administrativa.</p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="ministry-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close-ministry-modal></div>
+    <div class="modal-card ministry-modal-card">
+      <div class="modal-head">
+        <div><span class="eyebrow" id="ministry-modal-eyebrow">MINISTÉRIOS</span><h2 id="ministry-modal-title">Novo registro</h2></div>
+        <button class="icon-btn" data-close-ministry-modal aria-label="Fechar"><span data-lucide="x"></span></button>
+      </div>
+      <div id="ministry-modal-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="config.js?v=3.3.1"></script>
+  <script src="ministerios-admin.js?v=3.4.1"></script>
+  <script src="permissions-ui.js?v=3.4.1"></script>
+</body>
+</html>
